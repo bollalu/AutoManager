@@ -1,0 +1,29 @@
+<title th:fragment="title">ESEMPIO</title>
+<div th:fragment="content">
+  <h1>Articoli</h1>
+	<hr />
+	<form class="form-inline" role="form" style="float:left">
+		<div class="form-group">
+			<div class="input-group">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-search"></span>
+				</div>
+				<input class="form-control" id="filter" />
+			</div>
+			<button id="search" class="btn btn-default">cerca</button>
+		</div>
+	</form>
+	<a class="btn btn-primary" href="article/new" style="float:right">Nuovo articolo</a>
+	<br />
+	<table class="table table-bordered table-striped table-hover" style="margin-top:30px">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Titolo</th>
+				<th>Azioni</th>
+			</tr>
+		</thead>
+		<tbody id="articles"></tbody>
+	</table>
+</div>
+<script th:fragment="script" src="/js/main.js"></script>
