@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority("USER"));
 			User userDetails = new User("user",
-					((BCryptPasswordEncoder) encoder).encode("password"),
+					((BCryptPasswordEncoder) encoder).encode("user"),
 					authorities);
 			userDetailsService.createUser(userDetails);
 		}

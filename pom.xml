@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>ch.suspi.web</groupId>
-	<artifactId>template</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>AutoManager</artifactId>
+	<version>1.0</version>
 	<packaging>war</packaging>
 
-	<name>template</name>
-	<description>Demo project for Spring Boot</description>
+	<name>AutoManager</name>
+	<description>Gestione veicoli</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
