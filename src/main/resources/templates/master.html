@@ -10,7 +10,7 @@
 <title th:replace="${view} :: title">ESEMPIO</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+<link href="" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
 	rel="stylesheet" />
 
 <!-- Custom styles for this template -->
@@ -46,7 +46,7 @@ body {
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li th:if="${sec.isAuthenticated()}"><a href="#" th:text="${'User login : '+sec.principal.username + ' ('+#strings.listJoin(sec.principal.authorities,',')+')'}">username</a></li>
-					<li th:if="${sec.isAuthenticated()}"><a href="/logout">logout</a></li>
+					<li th:if="${sec.isAuthenticated()}"><a href="" th:href="@{/logout}">logout</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -55,8 +55,8 @@ body {
 
 	<div class="container starter-template" th:include="${view} :: content"></div>
 	<!-- /.container -->
-	<script src="/webjars/jquery/1.11.3/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+	<script src="" th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 	<script src="" th:replace="${view} :: script"></script>
 </body>
 </html>
