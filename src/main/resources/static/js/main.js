@@ -6,6 +6,7 @@ $(document).ready(function(){
 	});
 });
 
+
 function fetchVeicoli(searchText)
 {	
 	var url = "/json/veicoli" + ((searchText) ? "/search?q="+searchText : ""); 
@@ -27,8 +28,13 @@ function fetchVeicoli(searchText)
 	    		 						'<a href="/veicolo?id='+element.id+'"><span class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a>'+		    		 				
 		    		 					'<a href="/veicolo/remove?id='+element.id+'"><span class="glyphicon glyphicon-trash"></span></a>'+
 		    		 				'</td>'+
-		    		 				'</tr>');       
+		    		 				'</tr>'); 
 		})
+	    $('#tabella').DataTable( {
+	        "language": {
+	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json"
+	        }
+	    } );
     })
     .fail(function() {
     	alert( "errore nel reperire i veicoli dalla bancadati" );
