@@ -23,10 +23,11 @@ public class ArticleController {
 	protected ArticleRepository ar;
 
 	//@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String greeting(Model model) {
-		return "articles";
-	}
+	//@RequestMapping(value = "/", method = RequestMethod.GET)
+	//public String greeting(Model model) {
+	//	return "articles";
+	//}
+	
 
 	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")

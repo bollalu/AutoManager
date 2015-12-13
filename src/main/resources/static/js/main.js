@@ -1,29 +1,36 @@
 $(document).ready(function(){
-	fetchArticles();
+	fetchVeicoli();
 	$("#search").click(function(e){
-		fetchArticles($("#filter").val());
+		fetchVeicoli($("#filter").val());
 		e.preventDefault();
 	});
 });
 
-function fetchArticles(searchText)
+function fetchVeicoli(searchText)
 {	
-	var url = "/json/articles" + ((searchText) ? "/search?q="+searchText : ""); 
+	var url = "/json/veicoli" + ((searchText) ? "/search?q="+searchText : ""); 
 	
 	$.ajax({
 		url:url, 
 		dataType:"json"
 	})
 	.done(function(data) {
-		$('#articles').empty();
-		$(data.articles).each(function(index, element){
-			 $('#articles').append('<tr><td><a href="/article?id='+element.id+'">'+element.id+'</a></td>'+
-		    		 				'<td> '+element.title+' </td>'+
-		    		 				'<td><a href="/article/remove?id='+element.id+'"><span class="glyphicon glyphicon-trash"></span></a></td>'+
+		$('#veicoli').empty();
+		$(data.veicoli).each(function(index, element){
+			 $('#veicoli').append('<tr>'+
+					 				'<td>'+element.id+'</td>'+
+		 							'<td>'+element.targa+' </td>'+
+		    		 				'<td>'+element.marca+' </td>'+
+		    		 				'<td>'+element.modello+' </td>'+
+		    		 				'<td>'+carburanti[element.carburante]+' </td>'+
+		    		 				'<td>'+
+	    		 						'<a href="/veicolo?id='+element.id+'"><span class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a>'+		    		 				
+		    		 					'<a href="/veicolo/remove?id='+element.id+'"><span class="glyphicon glyphicon-trash"></span></a>'+
+		    		 				'</td>'+
 		    		 				'</tr>');       
 		})
     })
     .fail(function() {
-    	alert( "errore nel reperire gli articoli" );
+    	alert( "errore nel reperire i veicoli dalla bancadati" );
     });
 }
