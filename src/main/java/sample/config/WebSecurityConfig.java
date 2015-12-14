@@ -57,8 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	// database deve essere creato con questa struttura
-	// create table users (    username varchar(50) not null primary key,    password varchar(255) not null,    enabled boolean not null) engine = InnoDb;
-	// create table authorities (    username varchar(50) not null,    authority varchar(50) not null,    foreign key (username) references users (username),    unique index authorities_idx_1 (username, authority)) engine = InnoDb;
+	// create table users ( username varchar(50) not null primary key, password varchar(255) not null,    enabled boolean not null) engine = InnoDb;
+	// create table authorities (    username varchar(50) not null, authority varchar(50) not null,    foreign key (username) references users (username),    unique index authorities_idx_1 (username, authority)) engine = InnoDb;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -74,6 +74,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			authorities.add(new SimpleGrantedAuthority("USER"));
 			User userDetails = new User("user",
 					((BCryptPasswordEncoder) encoder).encode("user"),
+					authorities);
+			userDetailsService.createUser(userDetails);
+		}
+		
+		if (!userDetailsService.userExists("admin")) {
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			authorities.add(new SimpleGrantedAuthority("ADMIN"));
+			User userDetails = new User("admin",
+					((BCryptPasswordEncoder) encoder).encode("admin"),
 					authorities);
 			userDetailsService.createUser(userDetails);
 		}
