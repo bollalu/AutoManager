@@ -9,8 +9,7 @@ $(document).ready(function(){
 
 function fetchVeicoli(searchText)
 {	
-	var url = "/json/veicoli" + ((searchText) ? "/search?q="+searchText : ""); 
-	
+	var url = "/json/veicoli" + ((searchText) ? "/search?q="+searchText : "");
 	$.ajax({
 		url:url, 
 		dataType:"json"
@@ -34,7 +33,7 @@ function fetchVeicoli(searchText)
 	        "language": {
 	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json"
 	        }
-	    } );
+	    });
     })
     .fail(function() {
     	alert( "errore nel reperire i veicoli dalla bancadati" );
