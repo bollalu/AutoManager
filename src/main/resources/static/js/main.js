@@ -1,15 +1,17 @@
 $(document).ready(function(){
 	fetchVeicoli();
-	$("#search").click(function(e){
+	/*$("#search").click(function(e){
 		fetchVeicoli($("#filter").val());
 		e.preventDefault();
-	});
+	});*/
 });
 
 
 function fetchVeicoli(searchText)
 {	
-	var url = "/json/veicoli" + ((searchText) ? "/search?q="+searchText : "");
+	var cp = $("#contextPath").val();
+	cp = (cp == "/")? "":cp;
+	var url = cp+"/json/veicoli" + ((searchText) ? "/search?q="+searchText : "");
 	$.ajax({
 		url:url, 
 		dataType:"json"
