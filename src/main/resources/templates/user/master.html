@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<title th:replace="${view} :: title">ESEMPIO</title>
+
+<!-- Bootstrap core CSS -->
+<link href="" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+
+<!-- Custom styles for this template -->
+<style>
+body {
+	padding-top: 50px;
+}
+
+.starter-template {
+	padding: 40px 15px;
+}
+</style>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/"><span class="glyphicon glyphicon-th-large"></span>AutoMANAGER</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="/">Carburante</a></li>
+					<li><a href="/">Gomme</a></li>
+					<li><a href="/">Statistiche</a></li>
+					<li><a href="/">ADMIN</a></li>					
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li th:if="${sec.isAuthenticated()}">
+						<a href="#" th:text="${'User login : '+sec.principal.username + ' ('+#strings.listJoin(sec.principal.authorities,',')+')'}">username</a>
+					</li>
+					<li th:if="${sec.isAuthenticated()}">
+						<a href="" th:href="@{/logout}">logout</a>
+					</li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container starter-template" th:include="${view} :: content"></div>
+	<!-- /.container -->
+	<script src="" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+	<script src="" th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+	<script src="" th:replace="${view} :: script"></script>
+</body>
+</html>

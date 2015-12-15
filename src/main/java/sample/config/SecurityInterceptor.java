@@ -52,8 +52,17 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
                 modelAndView.getModel().put("sec", sec);
             }
             if(!modelAndView.getViewName().startsWith("redirect:")){
-	            modelAndView.getModel().put("view", modelAndView.getViewName());
-	            modelAndView.setViewName("master");
+            	String path="";
+            	String view=modelAndView.getViewName();
+            	
+            	String[] parts = modelAndView.getViewName().split("@");
+            	if (parts.length>1) {
+            		path = parts[0];
+            		view = parts[1];
+            	}
+            	
+	            modelAndView.getModel().put("view", path+"/"+view);
+	            modelAndView.setViewName(path+"/master");
             }
         }
     }

@@ -31,7 +31,7 @@ public class VeicoloController {
 	//@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String greeting(Model model) {
-		return "veicoli";
+		return "@veicoli";
 	}
 
 	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
@@ -45,7 +45,7 @@ public class VeicoloController {
 		
 		Veicolo veicolo = ar.findOne(id);
 		model.addAttribute("veicolo", veicolo);
-		return "veicoloEditForm";
+		return "@veicoloEditForm";
 	}
 	
 	@RequestMapping(value = "/veicolo", method = RequestMethod.POST)
@@ -58,7 +58,7 @@ public class VeicoloController {
 	public String veicolo(Model model) {
 		Veicolo veicolo = new Veicolo();
 		model.addAttribute("veicolo", veicolo);
-		return "veicoloNewForm";
+		return "@veicoloNewForm";
 	}
 	
 	@RequestMapping(value = "/veicolo/new", method = RequestMethod.POST)
