@@ -11,6 +11,6 @@ public class HomeController {
 	//@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		return "home";
+		return "login";
 	}
 }
