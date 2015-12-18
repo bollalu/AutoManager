@@ -35,9 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public AuthenticationSuccessHandler successHandler() {
-	    SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
+		MySimpleUrlAuthenticationSuccessHandler handler = new MySimpleUrlAuthenticationSuccessHandler();
+		
+	    /*SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
 	    handler.setTargetUrlParameter("url");
 	    handler.setAlwaysUseDefaultTargetUrl(false);
+	    */
 	    return handler;
 	}
 	
@@ -49,12 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 								.antMatchers("/webjars/**").permitAll()
 								.antMatchers("/css/**", "/js/**").permitAll()
 								.anyRequest().authenticated();
-		http.formLogin().failureUrl("/login?error")
-				.loginPage("/login").successHandler(successHandler()).permitAll().and().logout()
+		http.formLogin().failureUrl("/?error")
+				.loginPage("/").successHandler(successHandler()).permitAll().and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").permitAll();
 		http.csrf().disable();
-		http.exceptionHandling().authenticationEntryPoint(new LoginRedirectUrlAuthentiactionEntryPoint("/login", "url"));
+		//http.exceptionHandling().authenticationEntryPoint(new LoginRedirectUrlAuthentiactionEntryPoint("/login", "url"));
 	}
 	
 	
