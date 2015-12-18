@@ -29,23 +29,29 @@ public class VeicoloController {
 	//}
 	
 	//@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String greeting(Model model) {
-		return "@veicoli";
+		return "admin@home";
 	}
-
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/admin/veicoli", method = RequestMethod.GET)
+	public String veicoli(Model model) {
+		return "admin@veicoli";
+	}
+	
 	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/veicolo", method = RequestMethod.GET)
-	public String veicolo(@RequestParam(value = "id", required = true) long id,
-			Model model) {
+	public String veicolo(@RequestParam(value = "id", required = true) long id,	Model model) {
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		System.out.println(username);
 		
 		Veicolo veicolo = ar.findOne(id);
 		model.addAttribute("veicolo", veicolo);
-		return "@veicoloEditForm";
+		return "admin@veicoloEditForm";
 	}
 	
 	@RequestMapping(value = "/veicolo", method = RequestMethod.POST)
@@ -58,7 +64,7 @@ public class VeicoloController {
 	public String veicolo(Model model) {
 		Veicolo veicolo = new Veicolo();
 		model.addAttribute("veicolo", veicolo);
-		return "@veicoloNewForm";
+		return "admin@veicoloNewForm";
 	}
 	
 	@RequestMapping(value = "/veicolo/new", method = RequestMethod.POST)

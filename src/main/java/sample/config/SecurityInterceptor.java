@@ -60,9 +60,13 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
             		path = parts[0];
             		view = parts[1];
             	}
-            	
 	            modelAndView.getModel().put("view", path+"/"+view);
 	            modelAndView.setViewName(path+"/master");
+	            System.out.println("-----------------------------------");
+            	System.out.println("View Name : " + modelAndView.getViewName());
+            	System.out.println("View : " + path+"/"+view);
+            	System.out.println("Path : " + path+"/master");
+	            System.out.println("-----------------------------------");            	
             }
         }
     }
