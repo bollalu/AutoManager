@@ -1,0 +1,18 @@
+<title th:fragment="modello" th:text="${veicolo.modello}">AutoManager Modifica</title>
+<div th:fragment="content">
+	<h1>Inserimento Nuova Marca</h1>
+	<form action="#" th:action="@{/marca}" th:object="${marca}" method="post">
+		
+		<div class="form-group">
+		    <label for="marca">Marca</label>
+		    <input type="text" class="form-control" th:field="*{marca}" />
+		</div>
+			
+		<input class="btn btn-default" type="submit" value="invia" />
+		
+		<hr />
+		<a href="/">Ritorna alle Marche</a>
+	</form>
+	<hr />
+</div>
+<script th:fragment="script" src="" th:src="@{/js/carburanti.js}"></script>

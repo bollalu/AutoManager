@@ -1,7 +1,7 @@
 <title th:fragment="modello" th:text="${veicolo.modello}">AutoManager Modifica</title>
 <div th:fragment="content">
 	<h1>Modifica Dati Veicolo</h1>
-	<form action="#" th:action="@{/veicolo}" th:object="${veicolo}" method="post">
+	<form action="#" th:action="@{/admin/veicolo}" th:object="${veicolo}" method="post">
 		<div class="form-group">
 		    <label for="id" th:text="'Id: ' + *{id}">Id</label>
 		    <input type="hidden" th:field="*{id}" />
@@ -35,7 +35,7 @@
 		<input class="btn btn-default" type="submit" value="invia" />
 		
 		<hr />
-		<a href="/">Ritorna alla lista veicoli</a>
+		<a href="/admin/veicoli">Ritorna alla lista veicoli</a>
 	</form>
 	<hr />
 </div>

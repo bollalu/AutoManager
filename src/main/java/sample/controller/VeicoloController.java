@@ -22,57 +22,62 @@ public class VeicoloController {
 	@Autowired
 	protected VeicoloRepository ar;
 
-	//@PreAuthorize("hasAuthority('USER')")
-	//@RequestMapping(value = "/", method = RequestMethod.GET)
-	//public String greeting(Model model) {
-	//	return "articles";
-	//}
 	
 	//@PreAuthorize("hasAuthority('USER')")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String greeting(Model model) {
+        System.out.println("Admin -> GET");
 		return "admin@home";
 	}
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/veicoli", method = RequestMethod.GET)
 	public String veicoli(Model model) {
+        System.out.println("Veicoli -> GET");
 		return "admin@veicoli";
 	}
 	
 	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/veicolo", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/veicolo", method = RequestMethod.GET)
 	public String veicolo(@RequestParam(value = "id", required = true) long id,	Model model) {
-		
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println(username);
-		
+        System.out.println("Veicolo -> GET");	
 		Veicolo veicolo = ar.findOne(id);
 		model.addAttribute("veicolo", veicolo);
 		return "admin@veicoloEditForm";
 	}
 	
-	@RequestMapping(value = "/veicolo", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/veicolo", method = RequestMethod.POST)
 	public String veicolo(@ModelAttribute Veicolo veicolo, Model model) {
+        System.out.println("Veicolo -> POST");
 		ar.save(veicolo);
-		return "redirect:/";
+		return "redirect:/admin/veicoli";
 	}
 	
-	@RequestMapping(value = "/veicolo/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/veicolo/new", method = RequestMethod.GET)
 	public String veicolo(Model model) {
+        System.out.println("Veicolo -> Nuovo -> GET");
 		Veicolo veicolo = new Veicolo();
 		model.addAttribute("veicolo", veicolo);
 		return "admin@veicoloNewForm";
 	}
 	
-	@RequestMapping(value = "/veicolo/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/veicolo/new", method = RequestMethod.POST)
 	public String veicoloPOST(@ModelAttribute Veicolo veicolo, Model model) {
+        System.out.println("Veicolo -> Nuovo -> POST");		
 		ar.save(veicolo);
-		return "redirect:/";
+		return "redirect:/admin/veicoli";
 	}
 
+	@RequestMapping(value = "/admin/veicolo/remove", method = RequestMethod.GET)
+	public String veicoloRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
+        System.out.println("Veicolo -> Remove -> GET");	
+        ar.delete(id);
+		return "redirect:/admin/veicoli";
+	}
+	
+	
 	@RequestMapping(value = "/json/veicoli", method = RequestMethod.GET)
 	public @ResponseBody Veicoli veicoliJSON(Model model) {
 		return new Veicoli(ar.findAll());

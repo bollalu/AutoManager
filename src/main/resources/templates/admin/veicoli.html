@@ -16,8 +16,29 @@
 		</thead>
 		<tbody id="veicoli"></tbody>
 	</table>
+	<div id="dataConfirmModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" 
+                class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="lblTitleConfirmYesNo" class="modal-title">Richiesta di Conferma</h4>
+            </div>
+            <div class="modal-body">
+                <p id="lblMsgConfirmYesNo"></p>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                    <a class="btn btn-default" href="#" id="dataConfirmOK">Elimina</a>
+                </div>
+        </div>
+    </div>
 </div>
+</div>
+		
 <script th:fragment="script" src="" th:src="@{/js/opzioni.js}"></script>
-<script th:fragment="script" src="" th:src="@{/js/main.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/veicoli.js}"></script>
 <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>

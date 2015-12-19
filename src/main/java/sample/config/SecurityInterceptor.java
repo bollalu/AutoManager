@@ -52,6 +52,10 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
                 modelAndView.getModel().put("sec", sec);
             }
             if(!modelAndView.getViewName().startsWith("redirect:")){
+            	
+	            System.out.println("-----------------------------------");
+            	System.out.println("View Name : " + modelAndView.getViewName());
+            	
             	String path="";
             	String view=modelAndView.getViewName();
             	
@@ -62,10 +66,9 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
             	}
 	            modelAndView.getModel().put("view", path+"/"+view);
 	            modelAndView.setViewName(path+"/master");
-	            System.out.println("-----------------------------------");
-            	System.out.println("View Name : " + modelAndView.getViewName());
-            	System.out.println("View : " + path+"/"+view);
-            	System.out.println("Path : " + path+"/master");
+
+            	System.out.println("View      : " + path+"/"+view);
+            	System.out.println("Path      : " + path+"/master");
 	            System.out.println("-----------------------------------");            	
             }
         }
