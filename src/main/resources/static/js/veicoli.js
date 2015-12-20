@@ -1,8 +1,8 @@
 $(document).ready(function(){
-	fetchVeicoli();
+	caricaVeicoli();
 });
 
-function fetchVeicoli(searchText)
+function caricaVeicoli(searchText)
 {	
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;

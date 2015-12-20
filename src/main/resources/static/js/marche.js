@@ -1,9 +1,8 @@
 $(document).ready(function(){
-	fetchMarche();
+	caricaMarche();
 });
 
-
-function fetchMarche(searchText)
+function caricaMarche(searchText)
 {	
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
@@ -16,13 +15,13 @@ function fetchMarche(searchText)
 		$('#marche').empty();
 		$(data.marche).each(function(index, element){
 			 $('#marche').append('<tr>'+
-					 				'<td>'+element.id+'</td>'+
-		    		 				'<td>'+element.marca+' </td>'+
+					 				'<td>'+ element.id +'</td>'+
+		    		 				'<td>'+ element.descrizione +' </td>'+
 		    		 				'<td>'+
-	    		 						'<a href="/marca?id='+element.id+'"><span class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a>'+		    		 				
-		    		 					'<a href="/marca/remove?id='+element.id+'"><span class="glyphicon glyphicon-trash"></span></a>'+
+	    		 						'<a href="/marca?id='+ element.id +'"><span class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a>'+		    		 				
+		    		 					'<a href="/marca/remove?id='+ element.id +'"><span class="glyphicon glyphicon-trash"></span></a>'+
 		    		 				'</td>'+
-		    		 				'</tr>'); 
+		    		 			'</tr>'); 
 		})
 	    $('#tabella').DataTable( {
 	        "language": {

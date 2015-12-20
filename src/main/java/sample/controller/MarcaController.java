@@ -22,59 +22,76 @@ public class MarcaController {
 	@Autowired
 	protected MarcaRepository ar;
 
+	
 	//@PreAuthorize("hasAuthority('USER')")
 	/*@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String greeting(Model model) {
+        System.out.println("Admin -> GET");
 		return "admin@home";
 	}*/
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marche", method = RequestMethod.GET)
 	public String marche(Model model) {
+        System.out.println("Marche -> GET");
 		return "admin@marche";
 	}
 	
 	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/marca", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/marca", method = RequestMethod.GET)
 	public String marca(@RequestParam(value = "id", required = true) long id,	Model model) {
-		
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println(username);
-		
+        System.out.println("Marca -> GET");
 		Marca marca = ar.findOne(id);
 		model.addAttribute("marca", marca);
 		return "admin@marcaEditForm";
 	}
 	
-	@RequestMapping(value = "/marca", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/marca", method = RequestMethod.POST)
 	public String marca(@ModelAttribute Marca marca, Model model) {
-		ar.save(marca);
-		return "redirect:/";
+        System.out.println("Marca -> POST");
+        System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).toString());     
+        if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
+        	ar.save(marca);
+    		return "redirect:/admin/marche";
+        }else{
+        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
+        	return "admin@marcaNewForm";
+        }
+
 	}
 	
-	@RequestMapping(value = "/marca/new", method = RequestMethod.GET)
-	public String veicolo(Model model) {
+	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.GET)
+	public String marca(Model model) {
+        System.out.println("Marca -> Nuovo -> GET");
 		Marca marca = new Marca();
 		model.addAttribute("marca", marca);
 		return "admin@marcaNewForm";
 	}
 	
-	@RequestMapping(value = "/marca/new", method = RequestMethod.POST)
-	public String veicoloPOST(@ModelAttribute Marca marca, Model model) {
+	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.POST)
+	public String marcaPOST(@ModelAttribute Marca marca, Model model) {
+        System.out.println("Marca -> Nuovo -> POST");
 		ar.save(marca);
-		return "redirect:/";
+		return "redirect:/admin/marche";
 	}
+	
+	@RequestMapping(value = "/admin/marca/remove", method = RequestMethod.GET)
+	public String marcaRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
+        System.out.println("Marca -> Remove -> GET");	
+        ar.delete(id);
+		return "redirect:/admin/marche";
+	}	
 
 	@RequestMapping(value = "/json/marche", method = RequestMethod.GET)
-	public @ResponseBody Marche veicoliJSON(Model model) {
+	public @ResponseBody Marche marcheJSON(Model model) {
 		return new Marche(ar.findAll());
 	}
 	
 	@RequestMapping(value = "/json/marche/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Marche marcaJSON(@RequestParam(value = "q", required = true) String q, Model model) {
-		return new Marche(ar.findByMarcaContainingIgnoreCase(q));
+		return new Marche(ar.findByDescrizioneContainingIgnoreCase(q));
 	}
 
 	@RequestMapping(value = "/json/marca/{id}", method = RequestMethod.GET)

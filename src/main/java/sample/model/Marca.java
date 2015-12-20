@@ -13,15 +13,15 @@ public class Marca {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    private String marca;
+    private String descrizione;
 
     public Marca(){
     	//id = Math.abs(new Random().nextLong());
     }
 
-	public Marca(String marca, String... tags){
+	public Marca(String descrizione, String... tags){
 		//id = Math.abs(new Random().nextLong());
-    	this.marca = marca;
+    	this.descrizione = descrizione;
     	//this.tags.addAll(Arrays.asList(tags));
     }
     
@@ -33,18 +33,18 @@ public class Marca {
         this.id = id;
     }
  
-    public String getMarca() {
-        return marca;
+    public String getDescrizione() {
+        return descrizione;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
     
 
 	@Override
 	public String toString() {
-		return "Marca [id=" + id + ", marca=" + marca + "]";
+		return "Marca [id=" + id + ", marca=" + descrizione + "]";
 	}
 
 }

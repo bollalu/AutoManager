@@ -23,7 +23,7 @@ public class Marche {
     	}
     }
  
-    public List<Marca> getMarca() {
+    public List<Marca> getMarche() {
         return marche;
     }
  

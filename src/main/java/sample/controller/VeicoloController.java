@@ -77,7 +77,6 @@ public class VeicoloController {
 		return "redirect:/admin/veicoli";
 	}
 	
-	
 	@RequestMapping(value = "/json/veicoli", method = RequestMethod.GET)
 	public @ResponseBody Veicoli veicoliJSON(Model model) {
 		return new Veicoli(ar.findAll());
