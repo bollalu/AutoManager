@@ -41,10 +41,9 @@ public class Marca {
         this.descrizione = descrizione;
     }
     
-
 	@Override
 	public String toString() {
-		return "Marca [id=" + id + ", marca=" + descrizione + "]";
+		return "Marca [id=" + id + ", descrizione=" + descrizione + "]";
 	}
 
 }

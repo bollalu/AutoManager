@@ -51,15 +51,14 @@ public class MarcaController {
 	@RequestMapping(value = "/admin/marca", method = RequestMethod.POST)
 	public String marca(@ModelAttribute Marca marca, Model model) {
         System.out.println("Marca -> POST");
-        System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).toString());     
-        if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
+        //System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).toString());
+        //if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
         	ar.save(marca);
     		return "redirect:/admin/marche";
-        }else{
+        /*}else{
         	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
-        	return "admin@marcaNewForm";
-        }
-
+        	return "admin@marcaEditForm";
+        }*/
 	}
 	
 	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.GET)
@@ -73,8 +72,14 @@ public class MarcaController {
 	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.POST)
 	public String marcaPOST(@ModelAttribute Marca marca, Model model) {
         System.out.println("Marca -> Nuovo -> POST");
-		ar.save(marca);
-		return "redirect:/admin/marche";
+        System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).iterator().hasNext());     
+        if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
+        	ar.save(marca);
+    		return "redirect:/admin/marche";
+        }else{
+        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
+        	return "admin@marcaNewForm";
+        }
 	}
 	
 	@RequestMapping(value = "/admin/marca/remove", method = RequestMethod.GET)

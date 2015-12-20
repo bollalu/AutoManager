@@ -20,11 +20,7 @@
 		
 		<div class="form-group">
 			<label for="carburante">Carburante</label>
-			<select class="form-control"th:field="*{carburante}">
-  				<option value=0>Benzina Verde</option>
-  				<option value=1>Diesel</option>
-  				<option value=2>GPL</option>
-  				<option value=3>Metano</option>
+			<select class="form-control" th:field="*{carburante}">	
 			</select>
 		</div>
 		
@@ -35,4 +31,4 @@
 	</form>
 	<hr />
 </div>
-<script th:fragment="script" src="" th:src="@{/js/carburanti.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/veicoli.js}"></script>

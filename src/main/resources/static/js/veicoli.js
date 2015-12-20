@@ -1,6 +1,31 @@
+
 $(document).ready(function(){
+	caricaCarburanti();
 	caricaVeicoli();
+	caricaConferma();
 });
+
+var carburante = ["Benzina Verde", "Diesel", "GPL", "Metano"];
+
+function caricaCarburanti()
+{
+	$select = $('#carburante');			
+	$.each(carburante, function(val){
+      $select.append('<option value="' + val + '">' + carburante[val] + '</option>');
+	}
+	);
+}
+
+function caricaConferma()
+{
+	$('a[data-confirm]').click(function(ev) {
+		var href = $(this).attr('href');
+		$('#dataConfirmModal').find('.modal-body').html($(this).attr('data-confirm'));
+		$('#dataConfirmOK').attr('href', href);
+		$('#dataConfirmModal').modal({show:true});
+		return false;
+	});
+}
 
 function caricaVeicoli(searchText)
 {	
@@ -37,13 +62,6 @@ function caricaVeicoli(searchText)
 	            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json"
 	        }
 	    });
-		$('a[data-confirm]').click(function(ev) {
-			var href = $(this).attr('href');
-			$('#dataConfirmModal').find('.modal-body').html($(this).attr('data-confirm'));
-			$('#dataConfirmOK').attr('href', href);
-			$('#dataConfirmModal').modal({show:true});
-			return false;
-		});		
     })
     .fail(function() {
     	alert( "errore nel reperire i veicoli dalla bancadati" );
