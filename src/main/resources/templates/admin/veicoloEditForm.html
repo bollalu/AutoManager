@@ -1,4 +1,4 @@
-<title th:fragment="modello" th:text="${veicolo.modello}">AutoManager Modifica</title>
+<title th:fragment="modello" th:text="'AutoManager Modifica ' + ${veicolo.marca} + ' ' + ${veicolo.modello}">AutoManager Modifica</title>
 <div th:fragment="content">
 	<h1>Modifica Dati Veicolo</h1>
 	<form action="#" th:action="@{/admin/veicolo}" th:object="${veicolo}" method="post">
@@ -24,7 +24,9 @@
 		
 		<div class="form-group">
 			<label for="carburante">Carburante</label>
-			<select class="form-control" th:field="*{carburante}">		
+			<select class="form-control" th:field="*{carburante}">
+        		<option th:each="option : ${carburanti}" th:value="1" 
+                    th:text="1" >Options</option>			
 			</select>
 		</div>
 		

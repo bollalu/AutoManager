@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Veicolo;
+import sample.model.Carburante;
+import sample.model.Carburanti;
 import sample.model.Veicoli;
+import sample.repo.CarburanteRepository;
 import sample.repo.VeicoloRepository;
 
 @Controller
 public class VeicoloController {
 
 	@Autowired
-	protected VeicoloRepository ar;
+	protected VeicoloRepository vr;
+	protected CarburanteRepository cr;	
 
 	
 	//@PreAuthorize("hasAuthority('USER')")
@@ -43,15 +47,18 @@ public class VeicoloController {
 	@RequestMapping(value = "/admin/veicolo", method = RequestMethod.GET)
 	public String veicolo(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Veicolo -> GET");	
-		Veicolo veicolo = ar.findOne(id);
+		Veicolo veicolo = vr.findOne(id);
+		Carburanti carburanti = (Carburanti) cr.findAll();
+		//System.out.println(cr.findAll());
 		model.addAttribute("veicolo", veicolo);
+		//model.addAttribute("carburanti", carburanti);
 		return "admin@veicoloEditForm";
 	}
 	
 	@RequestMapping(value = "/admin/veicolo", method = RequestMethod.POST)
 	public String veicolo(@ModelAttribute Veicolo veicolo, Model model) {
         System.out.println("Veicolo -> POST");
-		ar.save(veicolo);
+		vr.save(veicolo);
 		return "redirect:/admin/veicoli";
 	}
 	
@@ -66,30 +73,30 @@ public class VeicoloController {
 	@RequestMapping(value = "/admin/veicolo/new", method = RequestMethod.POST)
 	public String veicoloPOST(@ModelAttribute Veicolo veicolo, Model model) {
         System.out.println("Veicolo -> Nuovo -> POST");		
-		ar.save(veicolo);
+		vr.save(veicolo);
 		return "redirect:/admin/veicoli";
 	}
 
 	@RequestMapping(value = "/admin/veicolo/remove", method = RequestMethod.GET)
 	public String veicoloRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Veicolo -> Remove -> GET");	
-        ar.delete(id);
+        vr.delete(id);
 		return "redirect:/admin/veicoli";
 	}
 	
 	@RequestMapping(value = "/json/veicoli", method = RequestMethod.GET)
 	public @ResponseBody Veicoli veicoliJSON(Model model) {
-		return new Veicoli(ar.findAll());
+		return new Veicoli(vr.findAll());
 	}
 	
 	@RequestMapping(value = "/json/veicoli/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSON(@RequestParam(value = "q", required = true) String q, Model model) {
-		return new Veicoli(ar.findByModelloContainingIgnoreCase(q));
+		return new Veicoli(vr.findByModelloContainingIgnoreCase(q));
 	}
 
 	@RequestMapping(value = "/json/veicolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Veicolo veicoloJSON(@PathVariable long id, Model model) {
-		return ar.findOne(id);
+		return vr.findOne(id);
 	}
 
 }

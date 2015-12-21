@@ -1,6 +1,5 @@
-
 $(document).ready(function(){
-	caricaCarburanti();
+	//caricaCarburanti();
 	caricaVeicoli();
 	caricaConferma();
 });
@@ -11,7 +10,7 @@ function caricaCarburanti()
 {
 	$select = $('#carburante');			
 	$.each(carburante, function(val){
-      $select.append('<option value="' + val + '">' + carburante[val] + '</option>');
+      $select.append('<option [[*{carburante}]] value="' + val + '">' + carburante[val] + '</option>');
 	}
 	);
 }
