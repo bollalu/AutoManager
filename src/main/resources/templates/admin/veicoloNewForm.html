@@ -5,7 +5,9 @@
 		
 		<div class="form-group">
 		    <label for="marca">Marca</label>
-		    <input type="text" class="form-control" th:field="*{marca}" />
+			<select class="form-control" th:field="*{marca}">
+           		<option th:each="marca : ${marche}" th:value="${marca.id}" th:text="${marca.descrizione}"> </option>			
+			</select>		    
 		</div>
 		
 		<div class="form-group">
@@ -20,7 +22,8 @@
 		
 		<div class="form-group">
 			<label for="carburante">Carburante</label>
-			<select class="form-control" th:field="*{carburante}">	
+			<select class="form-control" th:field="*{carburante}">
+           		<option th:each="carburante : ${carburanti}" th:value="${carburante.id}" th:text="${carburante.descrizione}"> </option>			
 			</select>
 		</div>
 		

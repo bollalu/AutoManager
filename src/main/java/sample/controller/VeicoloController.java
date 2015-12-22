@@ -20,6 +20,7 @@ import sample.model.Veicoli;
 import sample.model.Carburante;
 import sample.model.Carburanti;
 import sample.repo.CarburanteRepository;
+import sample.repo.MarcaRepository;
 import sample.repo.VeicoloRepository;
 
 @Controller
@@ -27,8 +28,10 @@ public class VeicoloController {
 
 	@Autowired
 	protected VeicoloRepository vr;
+	@Autowired	
 	protected CarburanteRepository cr;	
-
+	@Autowired	
+	protected MarcaRepository mr;
 	
 	//@PreAuthorize("hasAuthority('USER')")
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -51,10 +54,9 @@ public class VeicoloController {
 	public String veicolo(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Veicolo -> GET");	
 		Veicolo veicolo = vr.findOne(id);
-		//Carburanti carburanti = (Carburanti) cr.findAll();
-		//System.out.println(cr.findAll());
 		model.addAttribute("veicolo", veicolo);
-		//model.addAttribute("carburanti", cr.findAll());
+		model.addAttribute("carburanti", cr.findAll());
+		model.addAttribute("marche", mr.findAll());		
 		return "admin@veicoloEditForm";
 	}
 	
@@ -70,6 +72,8 @@ public class VeicoloController {
         System.out.println("Veicolo -> Nuovo -> GET");
 		Veicolo veicolo = new Veicolo();
 		model.addAttribute("veicolo", veicolo);
+		model.addAttribute("carburanti", cr.findAll());
+		model.addAttribute("marche", mr.findAll());	
 		return "admin@veicoloNewForm";
 	}
 	
