@@ -1,5 +1,8 @@
 package sample.controller;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Veicolo;
+import sample.model.Veicoli;
 import sample.model.Carburante;
 import sample.model.Carburanti;
-import sample.model.Veicoli;
 import sample.repo.CarburanteRepository;
 import sample.repo.VeicoloRepository;
 
@@ -48,10 +51,10 @@ public class VeicoloController {
 	public String veicolo(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Veicolo -> GET");	
 		Veicolo veicolo = vr.findOne(id);
-		Carburanti carburanti = (Carburanti) cr.findAll();
+		//Carburanti carburanti = (Carburanti) cr.findAll();
 		//System.out.println(cr.findAll());
 		model.addAttribute("veicolo", veicolo);
-		//model.addAttribute("carburanti", carburanti);
+		//model.addAttribute("carburanti", cr.findAll());
 		return "admin@veicoloEditForm";
 	}
 	
@@ -98,5 +101,4 @@ public class VeicoloController {
 	public @ResponseBody Veicolo veicoloJSON(@PathVariable long id, Model model) {
 		return vr.findOne(id);
 	}
-
 }

@@ -25,8 +25,7 @@
 		<div class="form-group">
 			<label for="carburante">Carburante</label>
 			<select class="form-control" th:field="*{carburante}">
-        		<option th:each="option : ${carburanti}" th:value="1" 
-                    th:text="1" >Options</option>			
+           		<option th:each="entry : ${carburanti}" th:value="${carburanti.key}" th:text="${carburanti.value}"> </option>			
 			</select>
 		</div>
 		
