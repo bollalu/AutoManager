@@ -15,7 +15,7 @@ function caricaCarburanti(searchText)
 	.done(function(data) {
 		$('#carburanti').empty();
 		$(data.carburanti).each(function(index, element){
-			 var elimina = (idReferenziato("Carburante",element.id) > 0)? 'Ref '+ idReferenziato("Carburante",element.id):'<a href="/admin/carburante/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
+			 var elimina = (idReferenziato("Carburante",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Carburante",element.id)+' Ref</span>':'<a href="/admin/carburante/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
 						'<tr><td>Carburante&nbsp&nbsp</td><td>' + element.descrizione + '</td></tr></table>' +
 						'<br><br><strong>Attenzione!</strong> Non sarà possibile recuperare queste informazioni.<br>' + 		 																							
 						'Sei <strong>sicuro</strong> di voler eliminare questo elemento?">' +

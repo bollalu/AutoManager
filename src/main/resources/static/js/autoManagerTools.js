@@ -38,21 +38,21 @@ function idReferenziato(elementi,filtro)
 	return numero;
 }
 
-function idModelloReferenziato(filtro)
-{
+function contaElementi(elementi)
+{	
 	var numero = 0;
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
-	var url = cp+"/json/veicoli/searchModello?q="+filtro;
+	var url = cp+"/json/"+elementi;
 	$.ajax({
-				url:url, 
-				dataType:"json",
-	            async: false
+		url:url, 
+		dataType:"json",
+        async: false
 	})
 	.done(function(data) {
-		$(data.veicoli).each(function(index, element){
+		$(eval('(data.' + elementi + ')')).each(function(index, element){
 			numero++;
-	    });
-    })
-	return numero;
+		});
+	})
+return numero;
 }

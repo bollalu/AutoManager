@@ -1,4 +1,30 @@
 <title th:fragment="title">AutoManager</title>
 <div th:fragment="content">
-  Home Admin
+<div class="container">
+  <h1>Pannello di Controllo</h1>
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">Veicoli</h3></div>
+   <div class="panel-body"><span id="numeroVeicoli">Bala Bla</span> </div>
+  </div>
 </div>
+<div class="container"> 
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">Marche</h3></div>
+   <div class="panel-body" id="numeroMarche">Bla Bla</div>
+  </div>
+</div>
+<div class="container"> 
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">Modelli</h3></div>
+   <div class="panel-body" id="numeroModelli">Bala Bla</div>
+  </div>
+ </div>
+ <div class="container"> 
+  <div class="panel panel-primary">
+   <div class="panel-heading"><h3 class="panel-title">Carburanti</h3></div>
+   <div class="panel-body" id="numeroCarburanti">Bala Bla</div>
+  </div>
+ </div>
+</div>
+<script th:fragment="script" src="" th:src="@{/js/adminHome.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>
