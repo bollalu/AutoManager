@@ -3,4 +3,4 @@
 #create table marca 		(id int not null AUTO_INCREMENT, 				descrizione varchar(255),				PRIMARY KEY (id));
 #create table modello 		(id int not null AUTO_INCREMENT, 				marca int not null,						descrizione varchar(255),								PRIMARY KEY (id));
 #create table carburante 	(id int not null AUTO_INCREMENT, 				descrizione varchar(255),				PRIMARY KEY (id));
-#create table veicolo 		(id int not null AUTO_INCREMENT, 				carburante int not null,				marca  int not null,									modello int not null,		targa varchar(20),		PRIMARY KEY (id));
+#create table veicolo 		(id int not null AUTO_INCREMENT, 				carburante int not null,				marca int not null,										modello int not null,		targa varchar(20),		PRIMARY KEY (id));

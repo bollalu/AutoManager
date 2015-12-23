@@ -10,5 +10,6 @@ import sample.model.Marca;
 public interface MarcaRepository extends CrudRepository<Marca, Long> 
 {
     public Iterable<Marca> findMarcaByDescrizione(@Param("descrizione") String descrizione);
+    public Iterable<Marca> findMarcaById(@Param("id") long id);    
     public Iterable<Marca> findByDescrizioneContainingIgnoreCase(String descrizione);
 }

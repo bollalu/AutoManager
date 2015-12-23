@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	$('#numeroVeicoli').text("Disponibili : " + contaElementi("veicoli"));
-	$('#numeroMarche').text("Disponibili : " + contaElementi("marche"));
-	$('#numeroModelli').text("Disponibili : " + contaElementi("modelli"));
-	$('#numeroCarburanti').text("Disponibili : " + contaElementi("carburanti"));
+	$('#numeroVeicoli').html('<span class="badge alert-info">Configurati : ' + contaElementi("veicoli")+ '</span>');
+	$('#numeroMarche').html('<span class="badge alert-info">Disponibili : ' + contaElementi("marche")+ '</span>');
+	$('#numeroModelli').html('<span class="badge alert-info">Configurati : ' + contaElementi("modelli")+ '</span>');
+	$('#numeroCarburanti').html('<span class="badge alert-info">Disponibili : ' + contaElementi("carburanti")+ '</span>');
 });

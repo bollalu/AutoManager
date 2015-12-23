@@ -1,5 +1,6 @@
 package sample.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Veicolo {
     private long id;
     private long marca;
     private long modello;
+	@Column(unique=true)
     private String targa;
     private long carburante;
 

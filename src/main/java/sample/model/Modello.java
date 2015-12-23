@@ -1,5 +1,6 @@
 package sample.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class Modello {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 	private long marca;
+	@Column(unique=true)
     private String descrizione;
 
     public Modello(){

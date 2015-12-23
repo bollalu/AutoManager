@@ -10,5 +10,6 @@ import sample.model.Carburante;
 public interface CarburanteRepository extends CrudRepository<Carburante, Long> 
 {
     public Iterable<Carburante> findCarburanteByDescrizione(@Param("descrizione") String descrizione);
+    public Iterable<Carburante> findCarburanteById(@Param("id") long id);    
     public Iterable<Carburante> findByDescrizioneContainingIgnoreCase(String descrizione);
 }

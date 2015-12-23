@@ -1,5 +1,7 @@
 package sample.controller;
 
+import java.util.Iterator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +24,7 @@ import sample.repo.CarburanteRepository;
 public class CarburanteController {
 
 	@Autowired
-	protected CarburanteRepository cr;
+	protected CarburanteRepository car;
 
 	
 	//@PreAuthorize("hasAuthority('USER')")
@@ -45,7 +47,7 @@ public class CarburanteController {
 	@RequestMapping(value = "/admin/carburante", method = RequestMethod.GET)
 	public String carburante(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Carburante -> GET");
-		Carburante carburante = cr.findOne(id);
+		Carburante carburante = car.findOne(id);
 		model.addAttribute("carburante", carburante);
 		return "admin@carburanteEditForm";
 	}
@@ -53,13 +55,14 @@ public class CarburanteController {
 	@RequestMapping(value = "/admin/carburante", method = RequestMethod.POST)
 	public String carburante(@ModelAttribute Carburante carburante, Model model) {
         System.out.println("Carburante -> POST");
-        System.out.println("Esiste ? -> " + cr.findCarburanteByDescrizione(carburante.getDescrizione()).toString());
-        if (cr.findCarburanteByDescrizione(carburante.getDescrizione()).toString().length()<5){
-        	cr.save(carburante);
-    		return "redirect:/admin/carburanti";
-        }else{
-        	model.addAttribute("messaggio", "Il carburante " + carburante.getDescrizione() + " é già presente");
-        	return "admin@carburanteEditForm";
+        try {
+				car.save(carburante);
+	    		return "redirect:/admin/carburanti";
+			} catch (Exception e) {
+				model.addAttribute("messaggio", "Il carburante " + carburante.getDescrizione() + " é già presente");
+		        System.out.println("Carburante -> " + carburanteJSON(carburante.getId(), model));
+				model.addAttribute("carburante", carburanteJSON(carburante.getId(), model));
+				return "admin@carburanteEditForm";
         }
 	}
 	
@@ -74,37 +77,36 @@ public class CarburanteController {
 	@RequestMapping(value = "/admin/carburante/new", method = RequestMethod.POST)
 	public String carburantePOST(@ModelAttribute Carburante carburante, Model model) {
         System.out.println("Carburante -> Nuovo -> POST");
-        System.out.println("Esiste ? -> " + cr.findCarburanteByDescrizione(carburante.getDescrizione()).iterator().hasNext());     
-        if (cr.findCarburanteByDescrizione(carburante.getDescrizione()).toString().length()<5){
-        	cr.save(carburante);
-    		return "redirect:/admin/carburanti";
-        }else{
-        	model.addAttribute("messaggio", "Il carburante " + carburante.getDescrizione() + " é già presente");
-        	return "admin@carburanteNewForm";
+        try {
+				car.save(carburante);
+	    		return "redirect:/admin/carburanti";
+			} catch (Exception e) {
+				model.addAttribute("messaggio", "Il carburante " + carburante.getDescrizione() + " é già presente");
+				return "admin@carburanteNewForm";
         }
 	}
 	
 	@RequestMapping(value = "/admin/carburante/remove", method = RequestMethod.GET)
 	public String carburanteRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Carburante -> Remove -> GET");	
-        cr.delete(id);
+        car.delete(id);
 		return "redirect:/admin/carburanti";
 	}	
 
 
 	@RequestMapping(value = "/json/carburanti", method = RequestMethod.GET)
 	public @ResponseBody Carburanti carburantiJSON(Model model) {
-		return new Carburanti(cr.findAll());
+		return new Carburanti(car.findAll());
 	}
 	
 	@RequestMapping(value = "/json/carburanti/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Carburanti carburanteJSON(@RequestParam(value = "q", required = true) String q, Model model) {
-		return new Carburanti(cr.findByDescrizioneContainingIgnoreCase(q));
+		return new Carburanti(car.findByDescrizioneContainingIgnoreCase(q));
 	}
 
 	@RequestMapping(value = "/json/carburante/{id}", method = RequestMethod.GET)
 	public @ResponseBody Carburante carburanteJSON(@PathVariable long id, Model model) {
-		return cr.findOne(id);
+		return car.findOne(id);
 	}
 
 }

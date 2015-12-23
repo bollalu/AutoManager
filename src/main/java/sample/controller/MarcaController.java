@@ -20,7 +20,7 @@ import sample.repo.MarcaRepository;
 public class MarcaController {
 
 	@Autowired
-	protected MarcaRepository ar;
+	protected MarcaRepository mar;
 
 	
 	//@PreAuthorize("hasAuthority('USER')")
@@ -43,7 +43,7 @@ public class MarcaController {
 	@RequestMapping(value = "/admin/marca", method = RequestMethod.GET)
 	public String marca(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Marca -> GET");
-		Marca marca = ar.findOne(id);
+		Marca marca = mar.findOne(id);
 		model.addAttribute("marca", marca);
 		return "admin@marcaEditForm";
 	}
@@ -51,14 +51,15 @@ public class MarcaController {
 	@RequestMapping(value = "/admin/marca", method = RequestMethod.POST)
 	public String marca(@ModelAttribute Marca marca, Model model) {
         System.out.println("Marca -> POST");
-        //System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).toString());
-        //if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
-        	ar.save(marca);
-    		return "redirect:/admin/marche";
-        /*}else{
-        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
-        	return "admin@marcaEditForm";
-        }*/
+        try {
+				mar.save(marca);
+	    		return "redirect:/admin/marche";
+			} catch (Exception e) {
+	        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
+		        System.out.println("Marca -> " + marcaJSON(marca.getId(), model));
+				model.addAttribute("marca", marcaJSON(marca.getId(), model));
+	        	return "admin@marcaEditForm";
+        }        
 	}
 	
 	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.GET)
@@ -72,36 +73,35 @@ public class MarcaController {
 	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.POST)
 	public String marcaPOST(@ModelAttribute Marca marca, Model model) {
         System.out.println("Marca -> Nuovo -> POST");
-        System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).iterator().hasNext());     
-        if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
-        	ar.save(marca);
-    		return "redirect:/admin/marche";
-        }else{
-        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
-        	return "admin@marcaNewForm";
+        try {
+				mar.save(marca);
+	    		return "redirect:/admin/marche";
+			} catch (Exception e) {
+	        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
+	        	return "admin@marcaNewForm";
         }
 	}
 	
 	@RequestMapping(value = "/admin/marca/remove", method = RequestMethod.GET)
 	public String marcaRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Marca -> Remove -> GET");	
-        ar.delete(id);
+        mar.delete(id);
 		return "redirect:/admin/marche";
 	}	
 
 	@RequestMapping(value = "/json/marche", method = RequestMethod.GET)
 	public @ResponseBody Marche marcheJSON(Model model) {
-		return new Marche(ar.findAll());
+		return new Marche(mar.findAll());
 	}
 	
 	@RequestMapping(value = "/json/marche/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Marche marcaJSON(@RequestParam(value = "q", required = true) String q, Model model) {
-		return new Marche(ar.findByDescrizioneContainingIgnoreCase(q));
+		return new Marche(mar.findByDescrizioneContainingIgnoreCase(q));
 	}
 
 	@RequestMapping(value = "/json/marca/{id}", method = RequestMethod.GET)
 	public @ResponseBody Marca marcaJSON(@PathVariable long id, Model model) {
-		return ar.findOne(id);
+		return mar.findOne(id);
 	}
 
 }

@@ -2,7 +2,6 @@ package sample.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,15 +23,6 @@ public class ModelloController {
 	protected ModelloRepository mor;
 	@Autowired	
 	protected MarcaRepository mar;
-
-	
-	//@PreAuthorize("hasAuthority('USER')")
-	/*@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String greeting(Model model) {
-        System.out.println("Admin -> GET");
-		return "admin@home";
-	}*/
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/modelli", method = RequestMethod.GET)
@@ -55,16 +45,18 @@ public class ModelloController {
 	@RequestMapping(value = "/admin/modello", method = RequestMethod.POST)
 	public String modello(@ModelAttribute Modello modello, Model model) {
         System.out.println("Modello -> POST");
-        //System.out.println("Esiste ? -> " + ar.findMarcaByDescrizione(marca.getDescrizione()).toString());
-        //if (ar.findMarcaByDescrizione(marca.getDescrizione()).toString().length()<5){
-        	mor.save(modello);
-    		return "redirect:/admin/modelli";
-        /*}else{
-        	model.addAttribute("messaggio", "La marca " + marca.getDescrizione() + " é già presente");
-        	return "admin@marcaEditForm";
-        }*/
-	}
-	
+        try {
+				mor.save(modello);
+	    		return "redirect:/admin/modelli";
+			} catch (Exception e) {
+	        	model.addAttribute("messaggio", "Il modello " + modello.getDescrizione() + " é già presente");
+		        System.out.println("Modello -> " + modelloJSON(modello.getId(), model));
+				model.addAttribute("modello", modelloJSON(modello.getId(), model));
+				model.addAttribute("marche", mar.findAll());
+	        	return "admin@modelloEditForm";
+			}        
+	}        
+
 	@RequestMapping(value = "/admin/modello/new", method = RequestMethod.GET)
 	public String modello(Model model) {
         System.out.println("Modello -> Nuovo -> GET");
@@ -77,14 +69,14 @@ public class ModelloController {
 	@RequestMapping(value = "/admin/modello/new", method = RequestMethod.POST)
 	public String modelloPOST(@ModelAttribute Modello modello, Model model) {
         System.out.println("Modello -> Nuovo -> POST");
-        System.out.println("Esiste ? -> " + mor.findModelloByDescrizione(modello.getDescrizione()).iterator().hasNext());     
-        if (mor.findModelloByDescrizione(modello.getDescrizione()).toString().length()<5){
-        	mor.save(modello);
-    		return "redirect:/admin/modelli";
-        }else{
-        	model.addAttribute("messaggio", "Il modello " + modello.getDescrizione() + " é già presente");
-        	return "admin@modelloNewForm";
-        }
+        try {
+				mor.save(modello);
+	    		return "redirect:/admin/modelli";
+			} catch (Exception e) {
+	        	model.addAttribute("messaggio", "Il modello " + modello.getDescrizione() + " é già presente");
+				model.addAttribute("marche", mar.findAll());
+	        	return "admin@modelloNewForm";
+			}
 	}
 	
 	@RequestMapping(value = "/admin/modello/remove", method = RequestMethod.GET)
