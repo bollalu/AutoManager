@@ -13,16 +13,16 @@ public class Veicolo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    private String marca;
-    private String modello;
+    private long marca;
+    private long modello;
     private String targa;
-    private int carburante;
+    private long carburante;
 
     public Veicolo(){
     	//id = Math.abs(new Random().nextLong());
     }
 
-	public Veicolo(String modello, String... tags){
+	public Veicolo(long modello, String... tags){
 		//id = Math.abs(new Random().nextLong());
     	this.modello = modello;
     	//this.tags.addAll(Arrays.asList(tags));
@@ -36,19 +36,19 @@ public class Veicolo {
         this.id = id;
     }
  
-    public String getMarca() {
+    public long getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(long marca) {
         this.marca = marca;
     }
     
-	public String getModello() {
+	public long getModello() {
 		return modello;
 	}
 
-	public void setModello(String modello) {
+	public void setModello(long modello) {
 		this.modello = modello;
 	}
 	
@@ -61,11 +61,11 @@ public class Veicolo {
     }
 
 	
-	public int getCarburante() {
+	public long getCarburante() {
 		return carburante;
 	}
 
-	public void setCarburante(int carburante) {
+	public void setCarburante(long carburante) {
 		this.carburante = carburante;
 	}
 

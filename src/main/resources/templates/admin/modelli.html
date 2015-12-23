@@ -1,6 +1,6 @@
 <title th:fragment="title">AutoManager</title>
 <div th:fragment="content">
-  <h1>Marche</h1>	<a class="btn btn-primary" href="marca/new" style="float:right">Nuova Marca</a>
+  <h1>Modelli</h1>	<a class="btn btn-primary" href="modello/new" style="float:right">Nuovo Modello</a>
 	<hr />
 	<br />
 	<table id="tabella" class="table table-striped table-bordered" style="margin-top:30px">
@@ -8,10 +8,11 @@
 			<tr>
 			 	<th>Id</th>
 				<th>Marca</th>
+				<th>Modello</th>				
 				<th>Azioni</th>
 			</tr>
 		</thead>
-		<tbody id="marche"></tbody>
+		<tbody id="modelli"></tbody>
 	</table>
 	
 	
@@ -37,7 +38,7 @@
 </div>	
 </div>
 
-<script th:fragment="script" src="" th:src="@{/js/marche.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/modelli.js}"></script>
 <script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>
 <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>

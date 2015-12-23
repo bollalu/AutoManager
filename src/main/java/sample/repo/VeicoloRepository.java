@@ -10,5 +10,8 @@ import sample.model.Veicolo;
 public interface VeicoloRepository extends CrudRepository<Veicolo, Long> 
 {
     public Iterable<Veicolo> findVeicoliByTarga(@Param("targa") String targa);
-    public Iterable<Veicolo> findByModelloContainingIgnoreCase(String modello);
+    //public Iterable<Veicolo> findByModelloContainingIgnoreCase(String modello);
+	public Iterable<Veicolo> findByCarburante(long carburante);
+	public Iterable<Veicolo> findByModello(long modello);
+	public Iterable<Veicolo> findByMarca(long modello);
 }
