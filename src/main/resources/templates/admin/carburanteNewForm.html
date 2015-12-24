@@ -1,13 +1,16 @@
-<title th:fragment="descrizione" th:text="${carburante.descrizione}">AutoManager Modifica</title>
+<title th:fragment="descrizione" th:text="${carburante.descrizione}">AutoManager
+	Modifica</title>
 <div th:fragment="content">
 	<h1>Inserimento Nuovo Carburante</h1>
-	<form action="#" th:action="@{/admin/carburante/new}" th:object="${carburante}" method="post">
-		<div class="alert alert-warning" role="alert" th:if="${messaggio}" th:text="${messaggio} "></div>
+	<form action="#" th:action="@{/admin/carburante/new}"
+		th:object="${carburante}" method="post">
+		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
+			th:text="${messaggio} "></div>
 		<div class="form-group">
-		    <label for="marca">Carburante</label>
-		    <input type="text" class="form-control" th:field="*{descrizione}" />
+			<label for="marca">Carburante</label> <input type="text"
+				class="form-control" th:field="*{descrizione}" />
 		</div>
-			
+
 		<input class="btn btn-default" type="submit" value="invia" />
 		<hr />
 		<a href="/admin/carburanti">Ritorna alle lista carburanti</a>

@@ -1,27 +1,32 @@
 <title th:fragment="title">Login</title>
 <div th:fragment="content">
 
-<form method="post" class="form-horizontal">
-  <div class="form-group">
-    <label for="inputUsername" class="col-sm-2 control-label">User Name</label>
-    <div class="col-sm-3">
-      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="username">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-3">
-      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Sign in</button>
-    </div>
-  </div>
-    <div class="form-group">
-	<div class="alert alert-warning" role="alert" th:if="${param.error}">Invalid username and password.</div>
-    <div class="bg-success" th:if="${param.logout}">You have been logged out.</div>
-  </div>
-</form>      
+	<form method="post" class="form-horizontal">
+		<div class="form-group">
+			<label for="inputUsername" class="col-sm-2 control-label">User
+				Name</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" name="username"
+					id="inputUsername" placeholder="username">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="inputPassword"
+					name="password" placeholder="Password">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Sign in</button>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="alert alert-warning" role="alert" th:if="${param.error}">Invalid
+				username and password.</div>
+			<div class="bg-success" th:if="${param.logout}">You have been
+				logged out.</div>
+		</div>
+	</form>
 </div>

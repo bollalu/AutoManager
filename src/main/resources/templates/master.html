@@ -11,8 +11,10 @@
 
 <!-- Bootstrap core CSS -->
 <link href=""
-	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
 
 <!-- Custom styles for this template -->
 <style>
@@ -32,11 +34,11 @@ body {
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/">AutoMANAGER</a>
 			</div>
@@ -51,7 +53,6 @@ body {
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
-
 	<div class="container starter-template" th:include="${view} :: content"></div>
 	<!-- /.container -->
 	<script src="" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>

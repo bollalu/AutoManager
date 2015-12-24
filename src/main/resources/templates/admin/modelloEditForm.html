@@ -1,26 +1,30 @@
-<title th:fragment="descrizione" th:text="${modello.descrizione}">AutoManager Modifica</title>
+<title th:fragment="descrizione" th:text="${modello.descrizione}">AutoManager
+	Modifica</title>
 <div th:fragment="content">
 	<h1>Modifica Dati Marca</h1>
-	<form action="#" th:action="@{/admin/modello}" th:object="${modello}" method="post">
-		<div class="alert alert-warning" role="alert" th:if="${messaggio}" th:text="${messaggio} "></div>
+	<form action="#" th:action="@{/admin/modello}" th:object="${modello}"
+		method="post">
+		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
+			th:text="${messaggio} "></div>
 		<div class="form-group">
-		    <label for="id" th:text="'Id: ' + *{id}">Id</label>
-		    <input type="hidden" th:field="*{id}" />
+			<label for="id" th:text="'Id: ' + *{id}">Id</label> <input
+				type="hidden" th:field="*{id}" />
 		</div>
-		
- 		<div class="form-group">
-		    	<label for="marca">Marca</label>
-				<select class="form-control" th:field="*{marca}">
-           			<option th:each="marca : ${marche}" th:value="${marca.id}" th:text="${marca.descrizione}"> </option>			
-				</select>		    
+
+		<div class="form-group">
+			<label for="marca">Marca</label> <select class="form-control"
+				th:field="*{marca}">
+				<option th:each="marca : ${marche}" th:value="${marca.id}"
+					th:text="${marca.descrizione}"></option>
+			</select>
 		</div>
 		<div class="form-group">
-		    <label for="marca">Modello</label>		    
-		    <input type="text" class="form-control" th:field="*{descrizione}" />
+			<label for="marca">Modello</label> <input type="text"
+				class="form-control" th:field="*{descrizione}" />
 		</div>
-		
+
 		<input class="btn btn-default" type="submit" value="invia" />
-		
+
 		<hr />
 		<a href="/admin/modelli">Ritorna alla lista modelli</a>
 	</form>

@@ -1,45 +1,51 @@
 <title th:fragment="title">AutoManager</title>
 <div th:fragment="content">
-  <h1>Carburanti</h1>	<a class="btn btn-primary" href="carburante/new" style="float:right">Nuovo Carburante</a>
+	<h1>Carburanti</h1>
+	<a class="btn btn-primary" href="carburante/new" style="float: right">Nuovo
+		Carburante</a>
 	<hr />
 	<br />
-	<table id="tabella" class="table table-striped table-bordered" style="margin-top:30px">
+	<table id="tabella" class="table table-striped table-bordered"
+		style="margin-top: 30px">
 		<thead>
 			<tr>
-			 	<th>Id</th>
+				<th>Id</th>
 				<th>Carburante</th>
 				<th>Azioni</th>
 			</tr>
 		</thead>
 		<tbody id="carburanti"></tbody>
 	</table>
-	
-	
+
+
 	<div id="dataConfirmModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" 
-                class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 id="lblTitleConfirmYesNo" class="modal-title">Richiesta di Conferma</h4>
-            </div>
-            <div class="modal-body">
-                <p id="lblMsgConfirmYesNo"></p>
-            </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                    <a class="btn btn-default" href="#" id="dataConfirmOK">Elimina</a>
-                </div>
-        </div>
-    </div>
-</div>
-		<hr />
-		<a href="/admin">Ritorna al Pannello di Controllo</a>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 id="lblTitleConfirmYesNo" class="modal-title">Richiesta di
+						Conferma</h4>
+				</div>
+				<div class="modal-body">
+					<p id="lblMsgConfirmYesNo"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+					<a class="btn btn-default" href="#" id="dataConfirmOK">Elimina</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<a href="/admin">Ritorna al Pannello di Controllo</a>
 </div>
 
 <script th:fragment="script" src="" th:src="@{/js/carburanti.js}"></script>
 <script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>
-<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>

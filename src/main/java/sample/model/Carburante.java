@@ -7,15 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 @XmlRootElement(name = "carburante")
 @Entity
 public class Carburante {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 	@Column(unique=true)
     private String descrizione;
+	
 
     public Carburante(){
     	//id = Math.abs(new Random().nextLong());
