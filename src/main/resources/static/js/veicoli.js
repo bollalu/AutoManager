@@ -7,9 +7,9 @@ function caricaVeicoli(searchText)
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
 	
-	var listaMarche 	= caricaListaElementi("marche");
-	var listaCarburanti = caricaListaElementi("carburanti");
-	var listaModelli 	= caricaListaElementi("modelli");
+	//var listaMarche 	= caricaListaElementi("marche");
+	//var listaCarburanti = caricaListaElementi("carburanti");
+	//var listaModelli 	= caricaListaElementi("modelli");
 	
 	var url = cp+"/json/veicoli" + ((searchText) ? "/search?q="+searchText : "");
 	$.ajax({
@@ -23,15 +23,15 @@ function caricaVeicoli(searchText)
 			 $('#veicoli').append('<tr>'+
 					 				'<td>'+element.id+'</td>'+
 		 							'<td>'+element.targa+' </td>'+
-		    		 				'<td>'+listaMarche[element.marca]+' </td>'+
-		    		 				'<td>'+listaModelli[element.modello]+' </td>'+
-		    		 				'<td>'+listaCarburanti[element.carburante]+' </td>'+
+		    		 				'<td>'+element.marca.descrizione+' </td>'+
+		    		 				'<td>'+element.modello.descrizione+' </td>'+
+		    		 				'<td>'+element.carburante.descrizione+' </td>'+
 		    		 				'<td>'+
 	    		 						'<a href="/admin/veicolo?id='+element.id+'"><span class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a>'+
 	    		 						'<a href="/admin/veicolo/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
 	    		 																							'<tr><td>Targa</td><td>' + element.targa + '</td></tr>' +	    		 						
-	    		 																							'<tr><td>Marca</td><td>' + listaMarche[element.marca] + '</td></tr>' +
-	    		 																							'<tr><td>Modello&nbsp&nbsp</td><td>' + listaModelli[element.modello] + '</td></tr></table>' +
+	    		 																							'<tr><td>Marca</td><td>' + element.marca.descrizione + '</td></tr>' +
+	    		 																							'<tr><td>Modello&nbsp&nbsp</td><td>' + element.modello.descrizione + '</td></tr></table>' +
 	    		 																							'<br><br><strong>Attenzione!</strong> Non sarà possibile recuperare queste informazioni.<br>' + 		 																							
 	    		 																							'Sei <strong>sicuro</strong> di voler eliminare questo elemento?">' +
 		    		 					'<span class="glyphicon glyphicon-trash"></span></a>'+

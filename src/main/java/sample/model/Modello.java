@@ -28,8 +28,8 @@ public class Modello {
     	//id = Math.abs(new Random().nextLong());
     }
 
-	public Modello(String descrizione, long marca){
-		//this.marca = marca;
+	public Modello(String descrizione, Marca marca){
+		this.marca = marca;
     	this.descrizione = descrizione;
     }
     

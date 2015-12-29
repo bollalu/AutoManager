@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Modello;
+import sample.model.Marca;
 import sample.model.Modelli;
 import sample.repo.MarcaRepository;
 import sample.repo.ModelloRepository;
@@ -98,7 +99,7 @@ public class ModelloController {
 	}
 
 	@RequestMapping(value = "/json/modelli/marca", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Modelli modelloJSONmarca(@RequestParam(value = "q", required = true) long q, Model model) {
+	public @ResponseBody Modelli modelloJSONmarca(@RequestParam(value = "q", required = true) Marca q, Model model) {
         System.out.println("Ricerca tramite MARCA");
 		return new Modelli(mor.findModelloByMarca(q));
 	}

@@ -74,9 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		/*System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		System.out.println(userDetailsService.userExists("promani"));
 		System.out.println(userDetailsService.getDataSource());
-		System.out.println(userDetailsService.getJdbcTemplate());
-		System.out.println(userDetailsService.);		
-		*/	
+		System.out.println(userDetailsService.getJdbcTemplate());*/
 
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 		auth.jdbcAuthentication().dataSource(datasource);
