@@ -1,5 +1,6 @@
 package sample.controller;
 
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +14,7 @@ public class HomeController {
 	
 	//@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	
-	
-	public String home(Model model) {
+	public String home(Model model) {		
 		return "/login";
 	}
 	

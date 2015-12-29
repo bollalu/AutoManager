@@ -70,10 +70,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager();
 		userDetailsService.setDataSource(datasource);
 		PasswordEncoder encoder = (PasswordEncoder) new BCryptPasswordEncoder();
+		
+		/*System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		System.out.println(userDetailsService.userExists("promani"));
+		System.out.println(userDetailsService.getDataSource());
+		System.out.println(userDetailsService.getJdbcTemplate());
+		System.out.println(userDetailsService.);		
+		*/	
 
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 		auth.jdbcAuthentication().dataSource(datasource);
-
+		
 		if (!userDetailsService.userExists("user")) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority("USER"));
@@ -91,6 +98,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					authorities);
 			userDetailsService.createUser(userDetails);
 		}
+		
+		if (!userDetailsService.userExists("promani")) {
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			authorities.add(new SimpleGrantedAuthority("ADMIN"));
+			User userDetails = new User("promani",
+					((BCryptPasswordEncoder) encoder).encode("1q2w3e4r"),
+					authorities);
+			userDetailsService.createUser(userDetails);
+		}		
 	}
-
 }

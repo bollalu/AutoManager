@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 @XmlRootElement(name = "modello")
 @Entity
@@ -14,7 +18,9 @@ public class Modello {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-	private long marca;
+	@ManyToOne
+	@JoinColumn(name="marca")
+	private Marca marca;
 	@Column(unique=true)
     private String descrizione;
 
@@ -23,7 +29,7 @@ public class Modello {
     }
 
 	public Modello(String descrizione, long marca){
-		this.marca = marca;
+		//this.marca = marca;
     	this.descrizione = descrizione;
     }
     
@@ -35,11 +41,11 @@ public class Modello {
         this.id = id;
     }
 
-    public long getMarca() {
+    public Marca getMarca() {
         return marca;
     }
 
-    public void setMarca(long marca) {
+    public void setMarca(Marca marca) {
         this.marca = marca;
     }    
     

@@ -33,7 +33,7 @@ public class CarburanteController {
 	public String carburanti(Model model) {
         System.out.println("Carburanti -> GET");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String nomeUtente = auth.getName();
+        String nomeUtente = auth.getName();       
         log.info("User {}: Richiesta lista Carburanti", nomeUtente);
 		return "admin@carburanti";
 	}

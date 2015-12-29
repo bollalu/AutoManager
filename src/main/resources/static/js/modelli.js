@@ -7,7 +7,7 @@ function caricaModelli(searchText)
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
 	
-	var listaMarche = caricaListaElementi("marche");
+	//var listaMarche = caricaListaElementi("marche");
 	
 	var url = cp+"/json/modelli" + ((searchText) ? "/search?q="+searchText : "");
 	$.ajax({
@@ -18,14 +18,14 @@ function caricaModelli(searchText)
 		$('#modelli').empty();
 		$(data.modelli).each(function(index, element){
 			var elimina = (idReferenziato("Modello",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Modello",element.id)+' Ref</span>':'<a href="/admin/modello/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
-						'<tr><td>Marca</td><td>' + listaMarche[element.marca] + '</td></tr>' +
+						'<tr><td>Marca</td><td>' + element.marca.descrizione + '</td></tr>' +
 						'<tr><td>Modello&nbsp&nbsp</td><td>' + element.descrizione + '</td></tr></table>' +											
 						'<br><br><strong>Attenzione!</strong> Non sarà possibile recuperare queste informazioni.<br>' + 		 																							
 						'Sei <strong>sicuro</strong> di voler eliminare questo elemento?">' +
 						'<span class="glyphicon glyphicon-trash"></span></a>';
 			 $('#modelli').append('<tr>'+
 					 				'<td>'+ element.id +'</td>'+
-		    		 				'<td>'+ listaMarche[element.marca] +' </td>'+
+		    		 				'<td>'+ element.marca.descrizione +' </td>'+
 		    		 				'<td>'+ element.descrizione +' </td>'+
 		    		 				'<td>'+
 	    		 						'<a href="/admin/modello?id='+ element.id +'"><span class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a>'+		    		 				

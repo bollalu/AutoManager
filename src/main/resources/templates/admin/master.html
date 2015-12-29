@@ -11,10 +11,8 @@
 
 <!-- Bootstrap core CSS -->
 <link href=""
-	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
-	rel="stylesheet" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
 
 <!-- Custom styles for this template -->
 <style>
@@ -61,17 +59,15 @@ body {
 						href="/admin/utenti">Utenti</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li th:if="${sec.isAuthenticated()}"><a href="#"
-						th:text="${'User login : '+sec.principal.username + ' ('+#strings.listJoin(sec.principal.authorities,',')+')'}">username</a>
+					<li th:if="${sec.isAuthenticated()}">
+					 <a href="#" th:text="${'User login : '+sec.principal.username + ' ('+#strings.listJoin(sec.principal.authorities,',')+')'}">username</a>
 					</li>
-					<li th:if="${sec.isAuthenticated()}"><a href=""
-						th:href="@{/logout}">logout</a></li>
+					<li th:if="${sec.isAuthenticated()}"><a href="" th:href="@{/logout}">logout</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
-
 	<div class="container starter-template" th:include="${view} :: content"></div>
 	<!-- /.container -->
 	<script src="" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
