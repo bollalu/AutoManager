@@ -1,2 +1,15 @@
 <title th:fragment="title">AutoManager</title>
-<div th:fragment="content">asdkjfhlkasdjfölkasdjfölajd</div>
+<div th:fragment="content">
+	<div class="container">
+		<div class="btn-group-vertical" role="group" aria-label="...">
+			<button type="button" class="btn btn-default btn-lg ">
+				<a href="/user/rifornimento">Rifornimento</a>
+			</button>
+			<button type="button" class="btn btn-default btn-lg ">
+				<a href="/user/cambiogomme">Cambio gomme</a>
+			</button>
+		</div>
+	</div>
+</div>
+<script th:fragment="script" src="" th:src="@{/js/adminHome.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>

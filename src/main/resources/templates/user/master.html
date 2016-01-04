@@ -19,11 +19,11 @@
 <!-- Custom styles for this template -->
 <style>
 body {
-	padding-top: 50px;
+	padding-top: 100px;
 }
 
-.starter-template {
-	padding: 40px 15px;
+.btn {
+	margin-bottom: 10px;
 }
 </style>
 </head>
@@ -44,10 +44,8 @@ body {
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="/">Carburante</a></li>
-					<li><a href="/">Gomme</a></li>
-					<li><a href="/">Statistiche</a></li>
+					<li class="active"><a href="/user">Home</a></li>
+					<li><a href="/">Cambia veicolo</a></li>
 					<li><a href="/">ADMIN</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -61,6 +59,7 @@ body {
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+
 
 	<div class="container starter-template" th:include="${view} :: content"></div>
 	<!-- /.container -->
