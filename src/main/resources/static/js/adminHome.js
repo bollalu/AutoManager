@@ -3,5 +3,6 @@ $(document).ready(function(){
 	$('#numeroMarche').html('<span class="badge alert-info">Disponibili : ' + contaElementi("marche")+ '</span>');
 	$('#numeroModelli').html('<span class="badge alert-info">Configurati : ' + contaElementi("modelli")+ '</span>');
 	$('#numeroCarburanti').html('<span class="badge alert-info">Disponibili : ' + contaElementi("carburanti")+ '</span>');
-	$('#numeroUtenti').html('<span class="badge alert-info">Disponibili : ' + contaElementi("utenti")+ '</span>');
+	$('#numeroUtenti').html('<span class="badge alert-info">Disponibili : ' + contaElementi("users")+ '</span>');
+	$('#numeroRuoli').html('<span class="badge alert-info">Disponibili : ' + contaElementi("authorities")+ '</span>');	
 });

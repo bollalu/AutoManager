@@ -1,46 +1,40 @@
 package sample.controller;
 
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sample.model.Carburante;
-import sample.model.Carburanti;
-
-import sample.repo.CarburanteRepository;
+import sample.model.Users;
+import sample.model.UsersList;
+import sample.repo.UsersRepository;
 
 @Controller
-public class CarburanteController {
+public class UsersController {
 
 	@Autowired
-	protected CarburanteRepository car;
+	protected UsersRepository usr;
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/admin/carburanti", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/users", method = RequestMethod.GET)
 	public String carburanti(Model model) {
-        System.out.println("Carburanti -> GET");
+        System.out.println("Utenti -> GET");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String nomeUtente = auth.getName();        
-        log.info("User {}: Richiesta lista Carburanti", nomeUtente);
-		return "admin@carburanti";
+        String nomeUtente = auth.getName();       
+        log.info("User {}: Richiesta lista Utenti", nomeUtente);
+		return "admin@users";
 	}
-	
+
+	/*
 	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/carburante", method = RequestMethod.GET)
@@ -109,12 +103,13 @@ public class CarburanteController {
 		return "redirect:/admin/carburanti";
 	}	
 
-
-	@RequestMapping(value = "/json/carburanti", method = RequestMethod.GET)
-	public @ResponseBody Carburanti carburantiJSON(Model model) {
-		return new Carburanti(car.findAll());
+*/
+	@RequestMapping(value = "/json/users", method = RequestMethod.GET)
+	public @ResponseBody UsersList userslistJSON(Model model) {
+		return new UsersList(usr.findAll());
 	}
-	
+
+	/*
 	@RequestMapping(value = "/json/carburanti/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Carburanti carburanteJSON(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new Carburanti(car.findByDescrizioneContainingIgnoreCase(q));
@@ -124,5 +119,5 @@ public class CarburanteController {
 	public @ResponseBody Carburante carburanteJSON(@PathVariable long id, Model model) {
 		return car.findOne(id);
 	}
-
+*/
 }
