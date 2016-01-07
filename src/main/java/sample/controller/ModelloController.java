@@ -104,6 +104,12 @@ public class ModelloController {
 		return new Modelli(mor.findModelloByMarca(q));
 	}
 	
+	@RequestMapping(value = "/json/modelli/marcaId", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Modelli modelloJSONmarcaId(@RequestParam(value = "q", required = true) long q, Model model) {
+        System.out.println("Ricerca tramite MARCA");
+		return new Modelli(mor.findModelloByMarcaId(q));
+	}
+	
 	@RequestMapping(value = "/json/modello/{id}", method = RequestMethod.GET)
 	public @ResponseBody Modello modelloJSON(@PathVariable long id, Model model) {
         System.out.println("Ricerca tramite ID");

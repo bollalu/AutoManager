@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Veicolo;
+import sample.model.Modelli;
 import sample.model.Veicoli;
 import sample.repo.CarburanteRepository;
 import sample.repo.MarcaRepository;
@@ -126,21 +127,21 @@ public class VeicoloController {
 
 	@RequestMapping(value = "/json/veicoli/searchCarburante", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSONcarburante(@RequestParam(value = "q", required = true) long q, Model model) {
-		return new Veicoli(ver.findByCarburante(q));
+		return new Veicoli(ver.findVeicoliByCarburanteId(q));
 	}
 
 	@RequestMapping(value = "/json/veicoli/searchModello", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSONmodello(@RequestParam(value = "q", required = true) long q, Model model) {
-		return new Veicoli(ver.findByModello(q));
+		return new Veicoli(ver.findVeicoliByModelloId(q));
 	}
 	
-	/*@RequestMapping(value = "/json/veicoli/searchMarca", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Veicoli veicoloJSONmarca(@RequestParam(value = "q", required = true) long q, Model model) {
-		return new Veicoli(ver.findByMarca(q));
+	@RequestMapping(value = "/json/veicoli/searchMarca", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Modelli veicoloJSONmarca(@RequestParam(value = "q", required = true) long q, Model model) {
+		return new Modelli(mor.findModelloByMarcaId(q));
 	}	
 		
 	@RequestMapping(value = "/json/veicolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Veicolo veicoloJSON(@PathVariable long id, Model model) {
 		return ver.findOne(id);
-	}*/
+	}
 }

@@ -14,7 +14,7 @@ function caricaMarche(searchText)
 	.done(function(data) {
 		$('#marche').empty();
 		$(data.marche).each(function(index, element){
-			var elimina = (idReferenziato("Marca",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Marca",element.id)+' Ref</span>':'<a href="/admin/marca/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
+			var elimina = (idReferenziato("Marca","modelli",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Marca","modelli",element.id)+' Ref</span>':'<a href="/admin/marca/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
 					'<tr><td>Marca&nbsp&nbsp</td><td>' + element.descrizione + '</td></tr></table>' +
 					'<br><br><strong>Attenzione!</strong> Non sarà possibile recuperare queste informazioni.<br>' + 		 																							
 					'Sei <strong>sicuro</strong> di voler eliminare questo elemento?">' +

@@ -4,5 +4,4 @@ $(document).ready(function(){
 	$('#numeroModelli').html('<span class="badge alert-info">Configurati : ' + contaElementi("modelli")+ '</span>');
 	$('#numeroCarburanti').html('<span class="badge alert-info">Disponibili : ' + contaElementi("carburanti")+ '</span>');
 	$('#numeroUtenti').html('<span class="badge alert-info">Disponibili : ' + contaElementi("users")+ '</span>');
-	$('#numeroRuoli').html('<span class="badge alert-info">Disponibili : ' + contaElementi("authorities")+ '</span>');	
 });

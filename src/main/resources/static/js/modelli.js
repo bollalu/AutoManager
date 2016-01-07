@@ -17,7 +17,7 @@ function caricaModelli(searchText)
 	.done(function(data) {
 		$('#modelli').empty();
 		$(data.modelli).each(function(index, element){
-			var elimina = (idReferenziato("Modello",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Modello",element.id)+' Ref</span>':'<a href="/admin/modello/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
+			var elimina = (idReferenziato("Modello","veicoli",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Modello","veicoli",element.id)+' Ref</span>':'<a href="/admin/modello/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
 						'<tr><td>Marca</td><td>' + element.marca.descrizione + '</td></tr>' +
 						'<tr><td>Modello&nbsp&nbsp</td><td>' + element.descrizione + '</td></tr></table>' +											
 						'<br><br><strong>Attenzione!</strong> Non sarà possibile recuperare queste informazioni.<br>' + 		 																							

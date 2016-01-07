@@ -19,22 +19,25 @@ function caricaListaElementi(elementi)
 
 }
 
-function idReferenziato(elementi,filtro)
+function idReferenziato(elementi,tabella,filtro)
 {
 	var numero = 0;
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
 	var url = cp+"/json/veicoli/search"+elementi+"?q="+filtro;
+	//alert(url+ "  -> " + tabella);
 	$.ajax({
 				url:url, 
 				dataType:"json",
 	            async: false
 	})
 	.done(function(data) {
-		$(data.veicoli).each(function(index, element){
+			//$(data.veicoli).each(function(index, element){
+			$(eval('(data.' + tabella + ')')).each(function(index, element){			
 			numero++;
 	    });
     })
+    //alert(numero);
 	return numero;
 }
 
