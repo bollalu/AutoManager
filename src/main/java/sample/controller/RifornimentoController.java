@@ -1,6 +1,5 @@
 package sample.controller;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +25,12 @@ public class RifornimentoController {
 	@Autowired
 	protected RifornimentoRepository rif;
 
-	// @PreAuthorize("hasAuthority('USER')")
+/*	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento", method = RequestMethod.GET)
 	public String rifornimento(@RequestParam(value = "id", required = true) long id, Model model) {
 		System.out.println("Rifornimento -> GET");
 		return "user@rifornimento";
-	}
+	}*/
 
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.GET)
