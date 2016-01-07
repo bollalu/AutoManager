@@ -7,8 +7,7 @@
 		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
 			th:text="${messaggio} "></div>
 		<div class="form-group">
-			<label for="marca">Marca</label> <select class="form-control"
-				th:field="*{marca}">
+			<label for="marca">Marca</label> <select class="form-control" id="marca">
 				<option th:each="marca : ${marche}" th:value="${marca.id}"
 					th:text="${marca.descrizione}"></option>
 			</select>

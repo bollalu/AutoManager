@@ -2,6 +2,8 @@ package sample.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,6 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Users {
 
  @Id
+ @GeneratedValue(strategy=GenerationType.IDENTITY)
+ private long id;
+ 
  @Column(name = "username", unique = true, nullable = false, length = 45)
  private String username;
 
@@ -21,7 +26,9 @@ public class Users {
  private boolean enabled;
 
 
-
+ public long getID() {
+	  return id;
+ }
 
 public String getUsername() {
   return username;

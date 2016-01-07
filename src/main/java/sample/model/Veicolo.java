@@ -16,9 +16,9 @@ public class Veicolo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-	@ManyToOne
-	@JoinColumn(name="marca")
-	private Marca marca;
+	//@ManyToOne
+	//@JoinColumn(name="marca")
+	//private Marca marca;
 	@ManyToOne
 	@JoinColumn(name="modello")	
     private Modello modello;
@@ -47,12 +47,12 @@ public class Veicolo {
     }
  
     public Marca getMarca() {
-        return marca;
+        return modello.marca;
     }
 
-    public void setMarca(Marca marca) {
+    /*public void setMarca(Marca marca) {
         this.marca = marca;
-    }
+    }*/
     
 	public Modello getModello() {
 		return modello;
@@ -81,8 +81,7 @@ public class Veicolo {
 
 	@Override
 	public String toString() {
-		return "Veicolo [id=" + id + ", marca=" + marca + ", modello="
-				+ modello + ", targa=" + targa + ", carburante=" + carburante + "]";
+		return "Veicolo [id=" + id + ", marca=" + modello.getMarca() + ", modello=" + modello + ", targa=" + targa + ", carburante=" + carburante + "]";	
 	}
 
 }

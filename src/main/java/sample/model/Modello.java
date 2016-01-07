@@ -19,8 +19,7 @@ public class Modello {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 	@ManyToOne
-	@JoinColumn(name="marca")
-	private Marca marca;
+	@JoinColumn(name="marca") Marca marca;
 	@Column(unique=true)
     private String descrizione;
 

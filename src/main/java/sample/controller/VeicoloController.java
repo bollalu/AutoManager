@@ -53,9 +53,9 @@ public class VeicoloController {
         System.out.println("Veicolo -> GET");
         Veicolo veicolo = ver.findOne(id);
 		model.addAttribute("veicolo", veicolo);
+		model.addAttribute("modelli", mor.findAll());		
 		model.addAttribute("marche", mar.findAll());
 		model.addAttribute("carburanti", car.findAll());
-		model.addAttribute("modelli", mor.findAll());
 		return "admin@veicoloEditForm";
 	}
 	
@@ -67,23 +67,23 @@ public class VeicoloController {
 	    		return "redirect:/admin/veicoli";
 			} catch (Exception e) {
 	        	model.addAttribute("messaggio", "La targa " + veicolo.getTarga() + " é già utilizzata");
-		        System.out.println("Veicolo -> " + veicoloJSON(veicolo.getId(), model));
-				model.addAttribute("veicolo", veicoloJSON(veicolo.getId(), model));
-				model.addAttribute("carburanti", car.findAll());
-				model.addAttribute("marche", mar.findAll());
+		        System.out.println("Veicolo -> " + veicoloJSONid(veicolo.getId(), model));
+				model.addAttribute("veicolo", veicoloJSONid(veicolo.getId(), model));
 				model.addAttribute("modelli", mor.findAll());
+				model.addAttribute("marche", mar.findAll());				
+				model.addAttribute("carburanti", car.findAll());
 	        	return "admin@veicoloEditForm";
 			}        
 	}         
-	
+
 	@RequestMapping(value = "/admin/veicolo/new", method = RequestMethod.GET)
 	public String veicolo(Model model) {
         System.out.println("Veicolo -> Nuovo -> GET");
 		Veicolo veicolo = new Veicolo();
 		model.addAttribute("veicolo", veicolo);
-		model.addAttribute("carburanti", car.findAll());
-		model.addAttribute("marche", mar.findAll());
 		model.addAttribute("modelli", mor.findAll());
+		model.addAttribute("marche", mar.findAll());		
+		model.addAttribute("carburanti", car.findAll());		
 		return "admin@veicoloNewForm";
 	}
 	
@@ -95,9 +95,9 @@ public class VeicoloController {
 	    		return "redirect:/admin/veicoli";
 			} catch (Exception e) {
 	        	model.addAttribute("messaggio", "La targa " + veicolo.getTarga() + " é già utilizzata");
-				model.addAttribute("carburanti", car.findAll());
-				model.addAttribute("marche", mar.findAll());
 				model.addAttribute("modelli", mor.findAll());
+				model.addAttribute("marche", mar.findAll());				
+				model.addAttribute("carburanti", car.findAll());				
 	        	return "admin@veicoloNewForm";
 			}        
 	}         
@@ -113,9 +113,14 @@ public class VeicoloController {
 	public @ResponseBody Veicoli veicoliJSON(Model model) {
 		return new Veicoli(ver.findAll());
 	}
-	
+
 	@RequestMapping(value = "/json/veicoli/search", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Veicoli veicoloJSON(@RequestParam(value = "q", required = true) String q, Model model) {
+	public @ResponseBody Veicoli veicoloJSONid(@RequestParam(value = "q", required = true) long q, Model model) {
+		return new Veicoli(ver.findVeicoliById(q));
+	}	
+	
+	@RequestMapping(value = "/json/veicoli/searchTarga", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Veicoli veicoloJSONtarga(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new Veicoli(ver.findVeicoliByTarga(q));
 	}
 
@@ -129,7 +134,7 @@ public class VeicoloController {
 		return new Veicoli(ver.findByModello(q));
 	}
 	
-	@RequestMapping(value = "/json/veicoli/searchMarca", method = RequestMethod.GET, produces = "application/json")
+	/*@RequestMapping(value = "/json/veicoli/searchMarca", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSONmarca(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Veicoli(ver.findByMarca(q));
 	}	
@@ -137,5 +142,5 @@ public class VeicoloController {
 	@RequestMapping(value = "/json/veicolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Veicolo veicoloJSON(@PathVariable long id, Model model) {
 		return ver.findOne(id);
-	}
+	}*/
 }

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import sample.model.AuthoritiesList;
 import sample.model.Users;
 import sample.model.UsersList;
 import sample.repo.UsersRepository;
@@ -93,31 +95,25 @@ public class UsersController {
         }
 	}
 	
-	@RequestMapping(value = "/admin/carburante/remove", method = RequestMethod.GET)
-	public String carburanteRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
-        System.out.println("Carburante -> Remove -> GET");	
+*/
+	
+	@RequestMapping(value = "/admin/users/remove", method = RequestMethod.GET)
+	public String usersRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
+        System.out.println("Users -> Remove -> GET");	
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String nomeUtente = auth.getName();
-        log.info("User {}: Eliminato Carburante-> {}", nomeUtente,carburanteJSON(id, model).getId() + ":" + carburanteJSON(id, model).getDescrizione());
-        car.delete(id);
+        log.info("User {}: Eliminato Carburante-> {}", nomeUtente, usersListJSON(id, model).getUsers());
+        usr.delete(id);
 		return "redirect:/admin/carburanti";
 	}	
 
-*/
 	@RequestMapping(value = "/json/users", method = RequestMethod.GET)
 	public @ResponseBody UsersList userslistJSON(Model model) {
 		return new UsersList(usr.findAll());
 	}
 
-	/*
-	@RequestMapping(value = "/json/carburanti/search", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Carburanti carburanteJSON(@RequestParam(value = "q", required = true) String q, Model model) {
-		return new Carburanti(car.findByDescrizioneContainingIgnoreCase(q));
+	@RequestMapping(value = "/json/users/search", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody UsersList usersListJSON(@RequestParam(value = "q", required = true) long id, Model model) {
+		return new UsersList(usr.findCarburanteById(id));
 	}
-
-	@RequestMapping(value = "/json/carburante/{id}", method = RequestMethod.GET)
-	public @ResponseBody Carburante carburanteJSON(@PathVariable long id, Model model) {
-		return car.findOne(id);
-	}
-*/
 }

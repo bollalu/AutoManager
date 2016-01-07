@@ -56,3 +56,22 @@ function contaElementi(elementi)
 	})
 return numero;
 }
+
+function getRuoli(username)
+{	
+	var lista = "";
+	var cp = $("#contextPath").val();
+	cp = (cp == "/")? "":cp;
+	var url = cp+"/json/authorities/search?q="+username;
+	$.ajax({
+		url:url, 
+		dataType:"json",
+        async: false
+	})
+	.done(function(data) {
+		$(data.authorities).each(function(index, element){
+			lista = element.authority;
+		});
+	})
+	return lista;
+}

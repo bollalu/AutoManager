@@ -113,7 +113,7 @@ public class AuthoritiesController {
 
 	@RequestMapping(value = "/json/authorities/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody AuthoritiesList authoritiesListJSON(@RequestParam(value = "q", required = true) String q, Model model) {
-		return new AuthoritiesList(aur.findAuthoritiesByAuthority(q));
+		return new AuthoritiesList(aur.findAuthoritiesByUsername(q));
 	}
 
 /*
