@@ -1,15 +1,26 @@
 <title th:fragment="title">AutoManager</title>
 <div th:fragment="content">
+
+
 	<div class="container">
-		<div class="btn-group-vertical" role="group" aria-label="...">
-			<button type="button" class="btn btn-default btn-lg ">
-				<a href="/user/rifornimento">Rifornimento</a>
-			</button>
-			<button type="button" class="btn btn-default btn-lg ">
-				<a href="/user/cambiogomme">Cambio gomme</a>
-			</button>
+		<div th:each="veicolo : ${veicoli}" class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<a href="/admin/marche" th:text="${veicolo.targa}">Marche</a>
+				</h3>
+			</div>
+			<div class="panel-body">
+
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="btn btn-default btn-lg ">
+						<a th:href="@{/user/rifornimento(veiId=${veicolo.id})}">Rifornimento</a>
+					</button>
+					<button type="button" class="btn btn-default btn-lg ">
+						<a th:href="@{/user/cambiogomme(veiId=${veicolo.id})}">Cambio gomme</a>
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
+
 </div>
-<script th:fragment="script" src="" th:src="@{/js/adminHome.js}"></script>
-<script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>
