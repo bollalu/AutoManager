@@ -35,12 +35,12 @@ public class RifornimentoController {
 
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.GET)
-	public String addRifornimento(@RequestParam(value = "veiId", required = true) long id, Model model) {
+	public String addRifornimento(@RequestParam(value = "veiId", required = true) long id,@RequestParam(value = "msg", required = false) String msg, Model model) {
 		System.out.println("Rifornimento -> Nuovo -> GET");
+		model.addAttribute("messaggio", msg);
 		Veicolo veicolo = vei.findOne(id);
 		Rifornimento rifornimento = new Rifornimento();
 		rifornimento.setVeicolo(veicolo);
-		//rif.save(rifornimento);
 		model.addAttribute("rifornimento", rifornimento);
 		return "user@rifornimentoNewForm";
 	}
@@ -53,11 +53,10 @@ public class RifornimentoController {
 			rifornimento.setData(new Date());
 			rifornimento.setVeicolo(vei.findOne(id));
 			rif.save(rifornimento);
-			return "redirect:/user";
-			//return "user@home";
+			return "redirect:/user?msg=Rifornimento OK";
 		} catch (Exception e) {
-			model.addAttribute("messaggio", e.getMessage());
-			return "user@rifornimentoNewForm";
+			//return "user@rifornimentoNewForm";
+			return "redirect:/user?msg="+e.getMessage();
 		}
 	}
 

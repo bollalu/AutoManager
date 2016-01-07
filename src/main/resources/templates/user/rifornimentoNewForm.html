@@ -1,6 +1,7 @@
 
 <div th:fragment="content">
-
+	<div class="alert alert-success" role="alert" th:if="${messaggio}"
+		th:text="${messaggio} "></div>
 	<form action="#" th:action="@{/user/rifornimento/new}"
 		th:object="${rifornimento}" method="post">
 		<input type="hidden" th:field="*{veicolo.id}" />
