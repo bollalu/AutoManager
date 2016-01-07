@@ -6,10 +6,8 @@ function caricaModelli(searchText)
 {	
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
-	
-	//var listaMarche = caricaListaElementi("marche");
-	
 	var url = cp+"/json/modelli" + ((searchText) ? "/search?q="+searchText : "");
+	var collegamenti=0;		
 	$.ajax({
 		url:url, 
 		dataType:"json"
@@ -17,7 +15,9 @@ function caricaModelli(searchText)
 	.done(function(data) {
 		$('#modelli').empty();
 		$(data.modelli).each(function(index, element){
-			var elimina = (idReferenziato("Modello","veicoli",element.id) > 0)? '<span class="badge alert-info">'+idReferenziato("Modello","veicoli",element.id)+' Ref</span>':'<a href="/admin/modello/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
+			collegamenti=idReferenziato("Modello","veicoli",element.id);			
+			var elimina = (collegamenti > 0)? '<span class="badge alert-info">'+
+					    collegamenti+' Collegament' + ((collegamenti > 1)? 'i' : 'o')+'</span>':'<a href="/admin/modello/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
 						'<tr><td>Marca</td><td>' + element.marca.descrizione + '</td></tr>' +
 						'<tr><td>Modello&nbsp&nbsp</td><td>' + element.descrizione + '</td></tr></table>' +											
 						'<br><br><strong>Attenzione!</strong> Non sarà possibile recuperare queste informazioni.<br>' + 		 																							
