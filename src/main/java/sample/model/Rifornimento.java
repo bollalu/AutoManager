@@ -1,5 +1,6 @@
 package sample.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +34,8 @@ public class Rifornimento {
 		return data;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setData(Date pDate) {
+		this.data = pDate;
 	}
 
 	public Integer getKm() {

@@ -3,10 +3,11 @@
 
 	<form action="#" th:action="@{/user/rifornimento/new}"
 		th:object="${rifornimento}" method="post">
+		<input type="hidden" th:field="*{veicolo.id}" />
 		<!-- 		<div class="alert alert-warning" role="alert" th:if="${messaggio}" th:text="${messaggio} "></div> -->
 
 		<h3
-			th:text="${veicolo.modello.marca.descrizione}+' '+ ${veicolo.modello.descrizione}"></h3>
+			th:text="*{veicolo.modello.marca.descrizione}+' '+ *{veicolo.modello.descrizione}"></h3>
 
 		<div class="form-group">
 			<label for="km">Km</label> <input type="text" class="form-control"
