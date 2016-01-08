@@ -25,7 +25,7 @@ public class CambioGommeController {
 	protected CambioGommeRepository cgo;
 	
 	@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value = "/user/cambioGomme/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/cambiogomme/new", method = RequestMethod.GET)
 	public String addCambioGomme(@RequestParam(value = "veiId", required = true) long id,@RequestParam(value = "msg", required = false) String msg, Model model) {
 		System.out.println("cambioGomme -> Nuovo -> GET");
 		model.addAttribute("messaggio", msg);
@@ -37,13 +37,13 @@ public class CambioGommeController {
 	}
 
 	//@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value = "/user/cambioGomme/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/cambiogomme/new", method = RequestMethod.POST)
 	public String saveCambioGomme(@ModelAttribute CambioGomme cambioGomme, @RequestParam(value = "veicolo.id", required = true) long id,Model model) {
 		System.out.println("cambioGomme -> Nuovo -> POST");
 		try {
 			cambioGomme.setData(new Date());
 			cambioGomme.setVeicolo(vei.findOne(id));
-			//cgo.save(cambioGomme);
+			cgo.save(cambioGomme);
 			return "redirect:/user?msg=Cambio gomme OK";
 		} catch (Exception e) {
 			//return "user@rifornimentoNewForm";

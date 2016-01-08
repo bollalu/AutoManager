@@ -8,7 +8,7 @@ import sample.model.CambioGomme;
 import sample.model.Rifornimento;
 
 @Repository
-public interface CambioGommeRepository extends CrudRepository<Rifornimento, Long> {
+public interface CambioGommeRepository extends CrudRepository<CambioGomme, Long> {
 
 	public Iterable<CambioGomme> findCambioGommeById(@Param("id") long id);
 

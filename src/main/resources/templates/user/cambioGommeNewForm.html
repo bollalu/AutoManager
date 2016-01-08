@@ -1,0 +1,32 @@
+
+<div th:fragment="content">
+	<div class="alert alert-success" role="alert" th:if="${messaggio}"
+		th:text="${messaggio} "></div>
+	<form action="#" th:action="@{/user/cambiogomme/new}"
+		th:object="${cambioGomme}" method="post">
+		<input type="hidden" th:field="*{veicolo.id}" />
+		<!-- 		<div class="alert alert-warning" role="alert" th:if="${messaggio}" th:text="${messaggio} "></div> -->
+
+		<h3
+			th:text="*{veicolo.modello.marca.descrizione}+' '+ *{veicolo.modello.descrizione}"></h3>
+
+		<div class="form-group">
+			<label for="km">Km</label> <input type="text" class="form-control"
+				th:field="*{km}" />
+		</div>
+
+		<div class="form-group">
+			<label for="descrizione">Descrizione gomme</label> <input type="text"
+				class="form-control" th:field="*{descrizione}" />
+		</div>
+
+		<div class="form-group">
+			<label for="costo">Costo</label> <input type="text"
+				class="form-control" th:field="*{costo}" />
+		</div>
+
+		<input class="btn btn-default" type="submit" value="invia" />
+
+	</form>
+
+</div>
