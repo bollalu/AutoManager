@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Veicolo;
 import sample.model.Modelli;
+import sample.model.Rifornimenti;
 import sample.model.Veicoli;
 import sample.repo.CarburanteRepository;
 import sample.repo.MarcaRepository;
 import sample.repo.ModelloRepository;
+import sample.repo.RifornimentoRepository;
 import sample.repo.VeicoloRepository;
 
 @Controller
@@ -31,6 +33,8 @@ public class VeicoloController {
 	protected MarcaRepository mar;
 	@Autowired	
 	protected ModelloRepository mor;
+	@Autowired	
+	protected RifornimentoRepository rir;	
 	
 	//@PreAuthorize("hasAuthority('USER')")
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -139,7 +143,12 @@ public class VeicoloController {
 	public @ResponseBody Modelli veicoloJSONmarca(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Modelli(mor.findModelloByMarcaId(q));
 	}	
-		
+
+	@RequestMapping(value = "/json/veicoli/searchRifornimento", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Rifornimenti rifornimentoJSONid(@RequestParam(value = "q", required = true) long q, Model model) {
+		return new Rifornimenti(rir.findRifornimentoByVeicoloId(q));
+	}
+	
 	@RequestMapping(value = "/json/veicolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Veicolo veicoloJSON(@PathVariable long id, Model model) {
 		return ver.findOne(id);
