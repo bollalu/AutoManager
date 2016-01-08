@@ -19,10 +19,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import sample.model.Users;
 
 
 @Configuration
@@ -79,15 +79,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 		auth.jdbcAuthentication().dataSource(datasource);
 		
-		if (!userDetailsService.userExists("user")) {
-			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			authorities.add(new SimpleGrantedAuthority("USER"));
-			User userDetails = new User("user",
-					((BCryptPasswordEncoder) encoder).encode("user"),
-					authorities);
-			userDetailsService.createUser(userDetails);
-		}
-		
 		if (!userDetailsService.userExists("admin")) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority("ADMIN"));
@@ -97,11 +88,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			userDetailsService.createUser(userDetails);
 		}
 		
-		if (!userDetailsService.userExists("promani")) {
+		if (!userDetailsService.userExists("user")) {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-			authorities.add(new SimpleGrantedAuthority("ADMIN"));
-			User userDetails = new User("promani",
-					((BCryptPasswordEncoder) encoder).encode("1q2w3e4r"),
+			authorities.add(new SimpleGrantedAuthority("USER"));
+			User userDetails = new User("user",
+					((BCryptPasswordEncoder) encoder).encode("password"),
 					authorities);
 			userDetailsService.createUser(userDetails);
 		}		

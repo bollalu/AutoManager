@@ -1,0 +1,34 @@
+<title th:fragment="descrizione" th:text="${users.username}">AutoManager
+	Modifica</title>
+<div th:fragment="content">
+	<h1>Inserimento Nuovo Utente</h1>
+	<form action="#" th:action="@{/admin/users/new}"
+		th:object="${users}" method="post">
+		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
+			th:text="${messaggio} "></div>
+		<div class="form-group">
+			<label for="marca">Username</label> <input type="text"
+				class="form-control" th:field="*{username}" />
+		</div>
+		<div class="form-group">
+			<label for="marca">Password</label> <input type="password"
+				class="form-control" th:field="*{password}" />
+		</div>	
+		<div class="form-group">
+			<label for="ruolo">Ruolo</label> 
+			<select class="form-control" id="ruolo" name="ruolo">
+				<option th:each="ruolo : ${ruoli}" th:value="${ruolo.descrizione}"
+					th:text="${ruolo.descrizione}"></option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label for="marca">Email</label> <input type="text"
+				class="form-control" th:field="*{email}" />
+		</div>
+		<input class="btn btn-default" type="submit" value="invia" />
+		<hr />
+		<a href="/admin/users">Ritorna alle lista utenti</a>
+	</form>
+	<hr />
+</div>

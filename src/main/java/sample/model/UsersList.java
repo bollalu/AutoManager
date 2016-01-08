@@ -8,11 +8,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "userslist")
+@XmlRootElement(name = "users")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UsersList {
 	
-	@XmlElement(name="user")
+	@XmlElement(name="userslist")
 	private List<Users> userslist = new ArrayList<Users>();
 	
 	public UsersList() {}

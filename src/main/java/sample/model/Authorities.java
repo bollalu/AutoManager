@@ -1,19 +1,20 @@
 package sample.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "authorities")
 @Entity
+@Table(name = "authorities")
 public class Authorities {
 	
  @Id
- @Column(name = "username", unique = true, nullable = false, length = 45)
+// @Column(name = "username", unique = true, nullable = false, length = 45)
  private String username;
 
- @Column(name = "authority", nullable = false, length = 45)
+// @Column(name = "authority", nullable = false, length = 45)
  private String authority;
 
 

@@ -57,6 +57,9 @@ body {
 					<li
 						th:classappend="${#httpServletRequest.getRequestURI() == '/admin/users' ? 'active':''}"><a
 						href="/admin/users">Utenti</a></li>
+					<li
+						th:classappend="${#httpServletRequest.getRequestURI() == '/admin/ruoli' ? 'active':''}"><a
+						href="/admin/ruoli">Ruoli</a></li>						
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li th:if="${sec.isAuthenticated()}">

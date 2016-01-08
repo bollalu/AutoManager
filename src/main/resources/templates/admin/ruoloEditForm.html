@@ -1,0 +1,25 @@
+<title th:fragment="descrizione" th:text="${ruolo.descrizione}">AutoManager
+	Modifica</title>
+<div th:fragment="content">
+	<h1>Modifica Dati Ruolo</h1>
+	<form action="#" th:action="@{/admin/ruolo}"
+		th:object="${ruolo}" method="post">
+		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
+			th:text="${messaggio} "></div>
+		<div class="form-group">
+			<label for="id" th:text="'Id: ' + *{id}">Id</label> <input
+				type="hidden" th:field="*{id}" />
+		</div>
+
+		<div class="form-group">
+			<label for="ruolo">Descrizione</label> <input type="text"
+				class="form-control" th:field="*{descrizione}" />
+		</div>
+
+		<input class="btn btn-default" type="submit" value="invia" />
+
+		<hr />
+		<a href="/admin/ruoli">Ritorna alla lista ruoli</a>
+	</form>
+	<hr />
+</div>
