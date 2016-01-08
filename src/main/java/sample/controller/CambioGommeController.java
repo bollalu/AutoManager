@@ -36,7 +36,7 @@ public class CambioGommeController {
 		return "user@cambioGommeNewForm";
 	}
 
-	//@PreAuthorize("hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/cambiogomme/new", method = RequestMethod.POST)
 	public String saveCambioGomme(@ModelAttribute CambioGomme cambioGomme, @RequestParam(value = "veicolo.id", required = true) long id,Model model) {
 		System.out.println("cambioGomme -> Nuovo -> POST");

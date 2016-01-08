@@ -61,7 +61,7 @@ public class CambioGomme {
 	public void setCosto(Float costo) {
 		this.costo = costo;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
@@ -81,5 +81,4 @@ public class CambioGomme {
 	
 	@Column
     private String Descrizione;
-
 }
