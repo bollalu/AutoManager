@@ -126,7 +126,7 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String nomeUtente = auth.getName();
         log.info("User {}: Eliminato Utente-> {}", nomeUtente, username);
-        aur.delete(username);        
+        //aur.delete(username);        
         usr.delete(username);
 		return "redirect:/admin/carburanti";
 	}
