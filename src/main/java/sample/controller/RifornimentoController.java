@@ -25,16 +25,10 @@ public class RifornimentoController {
 	@Autowired
 	protected RifornimentoRepository rif;
 
-/*	@PreAuthorize("hasAuthority('USER')")
-	@RequestMapping(value = "/user/rifornimento", method = RequestMethod.GET)
-	public String rifornimento(@RequestParam(value = "id", required = true) long id, Model model) {
-		System.out.println("Rifornimento -> GET");
-		return "user@rifornimento";
-	}*/
-
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.GET)
-	public String addRifornimento(@RequestParam(value = "veiId", required = true) long id,@RequestParam(value = "msg", required = false) String msg, Model model) {
+	public String addRifornimento(@RequestParam(value = "veiId", required = true) long id,
+			@RequestParam(value = "msg", required = false) String msg, Model model) {
 		System.out.println("Rifornimento -> Nuovo -> GET");
 		model.addAttribute("messaggio", msg);
 		Veicolo veicolo = vei.findOne(id);
@@ -44,9 +38,10 @@ public class RifornimentoController {
 		return "user@rifornimentoNewForm";
 	}
 
-	//@PreAuthorize("hasAuthority('USER')")
+	// @PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.POST)
-	public String saveRifornimento(@ModelAttribute Rifornimento rifornimento, @RequestParam(value = "veicolo.id", required = true) long id,Model model) {
+	public String saveRifornimento(@ModelAttribute Rifornimento rifornimento,
+			@RequestParam(value = "veicolo.id", required = true) long id, Model model) {
 		System.out.println("Rifornimento -> Nuovo -> POST");
 		try {
 			rifornimento.setData(new Date());
@@ -54,8 +49,8 @@ public class RifornimentoController {
 			rif.save(rifornimento);
 			return "redirect:/user?msg=Rifornimento OK";
 		} catch (Exception e) {
-			//return "user@rifornimentoNewForm";
-			return "redirect:/user?msg="+e.getMessage();
+			// return "user@rifornimentoNewForm";
+			return "redirect:/user?msg=" + e.getMessage();
 		}
 	}
 

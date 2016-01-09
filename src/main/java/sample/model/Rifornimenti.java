@@ -11,8 +11,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "rifornimenti")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Rifornimenti {
-
 	
+	public void setRifornimenti(List<Rifornimento> rifornimenti) {
+		this.rifornimenti = rifornimenti;
+	}
+
 	@XmlElement(name="rifornimento")
 	private List<Rifornimento> rifornimenti = new ArrayList<Rifornimento>();
 	
@@ -28,7 +31,4 @@ public class Rifornimenti {
         return rifornimenti;
     }
  
-    public void setVeicoli(List<Rifornimento> rifornimenti) {
-        this.rifornimenti = rifornimenti;
-    } 
 }

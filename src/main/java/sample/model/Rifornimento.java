@@ -21,14 +21,6 @@ public class Rifornimento {
 		this.id = id;
 	}
 
-	public Veicolo getVeicolo() {
-		return veicolo;
-	}
-
-	public void setVeicolo(Veicolo veicolo) {
-		this.veicolo = veicolo;
-	}
-
 	public Date getData() {
 		return data;
 	}
@@ -65,10 +57,29 @@ public class Rifornimento {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="veicolo")
+/*	@Column
+	private long veicoloId;
+
+public long getVeicoloId() {
+		return veicoloId;
+	}
+
+	public void setVeicoloId(long veicoloId) {
+		this.veicoloId = veicoloId;
+	}*/
+
+	@ManyToOne  //(fetch = FetchType.LAZY)
+	@JoinColumn(name="veicolo") //, nullable = false
 	private Veicolo veicolo;
 	
+	public Veicolo getVeicolo() {
+		return veicolo;
+	}
+
+	public void setVeicolo(Veicolo veicolo) {
+		this.veicolo = veicolo;
+	}
+
 	@Column
     private Date data;
 	
@@ -82,7 +93,7 @@ public class Rifornimento {
     private Float costo;
 
 	public Rifornimento(Veicolo pVeicolo, Integer pKm, Float pLitri, Float pCosto){
-		this.veicolo = pVeicolo;
+		//this.veicolo = pVeicolo;
     	this.km = pKm;
     	this.litri = pLitri;
     	this.costo = pCosto;

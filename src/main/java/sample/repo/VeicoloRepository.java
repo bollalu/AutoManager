@@ -1,11 +1,12 @@
 package sample.repo;
 
+import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import sample.model.Veicolo;
 
+@Transactional
 @Repository
 public interface VeicoloRepository extends CrudRepository<Veicolo, Long> 
 {
