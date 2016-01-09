@@ -16,9 +16,8 @@
 		</div>	
 		<div class="form-group">
 			<label for="ruolo">Ruolo</label> 
-			<select class="form-control" id="ruolo" name="ruolo">
-				<option th:each="ruolo : ${ruoli}" th:value="${ruolo.descrizione}"
-					th:text="${ruolo.descrizione}"></option>
+			<select class="form-control" id="ruolo" name="ruolo">			
+				<option th:each="ruolo : ${ruoli}" th:value="${ruolo.descrizione}" th:text="${ruolo.descrizione}"></option>
 			</select>
 		</div>
 		
@@ -28,7 +27,7 @@
 		</div>
 		<input class="btn btn-default" type="submit" value="invia" />
 		<hr />
-		<a href="/admin/users">Ritorna alle lista utenti</a>
+		<a href="/admin/userslist">Ritorna alle lista utenti</a>
 	</form>
 	<hr />
 </div>

@@ -39,7 +39,8 @@ public class ModelloController {
         System.out.println("Modello -> GET");
 		Modello modello = mor.findOne(id);
 		model.addAttribute("modello", modello);
-		model.addAttribute("marche", mar.findAll());	
+		model.addAttribute("marche", mar.findAll());
+        System.out.println(mar.findAll());		
 		return "admin@modelloEditForm";
 	}
 	

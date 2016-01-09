@@ -7,7 +7,7 @@ function caricaUsers(searchText)
 {	
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
-	var url = cp+"/json/users" + ((searchText) ? "/search?q="+searchText : "");
+	var url = cp+"/json/userslist" + ((searchText) ? "/search?q="+searchText : "");
 	$.ajax({
 		url:url, 
 		dataType:"json"
@@ -21,7 +21,6 @@ function caricaUsers(searchText)
 						'Sei <strong>sicuro</strong> di voler eliminare questo elemento?">' +
 						'<span class="glyphicon glyphicon-trash" ></span></a>';
 			 $('#users').append('<tr>'+
-					 				//'<td>' + element.id +'</td>'+
 					 				'<td>' + element.username +'</td>'+
 					 				'<td>' + element.email +'</td>'+					 				
 		    		 				'<td>' + getRuoli(element.username) + '</td>'+
@@ -46,6 +45,6 @@ function caricaUsers(searchText)
 	    });	
     })
     .fail(function() {
-    	alert( "errore nel reperire gli uteni dalla bancadati" );
+    	alert( "errore nel reperire gli utenti dalla bancadati" );
     });
 }

@@ -1,13 +1,11 @@
 package sample.controller;
 
-import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +39,6 @@ public class CarburanteController {
 		return "admin@carburanti";
 	}
 	
-	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/carburante", method = RequestMethod.GET)
 	public String carburante(@RequestParam(value = "id", required = true) long id,	Model model) {

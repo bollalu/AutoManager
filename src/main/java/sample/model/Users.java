@@ -2,8 +2,9 @@ package sample.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,15 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @XmlRootElement(name = "users")
 @Entity
-@Table(name = "users")
 public class Users {
  
-	@Id 
-	@Column(unique = true)	 
+	 @Id
+	 @Column(name = "username", unique = true, nullable = false)
 	 private String username;
 	 private String password;
 	 private boolean enabled = true;
-	 private String email;
+	 private String email;	 
 	 
 	public String getUsername() {
 	  return username;

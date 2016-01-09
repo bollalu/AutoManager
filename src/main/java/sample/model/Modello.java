@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.annotations.JoinColumnOrFormula;
 
 @XmlRootElement(name = "modello")
 @Entity

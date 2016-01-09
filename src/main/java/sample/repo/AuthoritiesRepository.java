@@ -12,4 +12,5 @@ public interface AuthoritiesRepository extends CrudRepository<Authorities, Long>
     public Iterable<Authorities> findAuthoritiesByUsername(@Param("username") String username);
     public Iterable<Authorities> findAuthoritiesByAuthority(@Param("authority") String authority);
     public Iterable<Authorities> findByUsernameContainingIgnoreCase(String username);
+	public void deleteByUsername(String username);
 }

@@ -22,7 +22,6 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import sample.model.Users;
 
 
 @Configuration
@@ -70,11 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager();
 		userDetailsService.setDataSource(datasource);
 		PasswordEncoder encoder = (PasswordEncoder) new BCryptPasswordEncoder();
-		
-		/*System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-		System.out.println(userDetailsService.userExists("promani"));
-		System.out.println(userDetailsService.getDataSource());
-		System.out.println(userDetailsService.getJdbcTemplate());*/
 
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
 		auth.jdbcAuthentication().dataSource(datasource);
