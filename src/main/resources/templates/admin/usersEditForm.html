@@ -6,12 +6,9 @@
 		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
 			th:text="${messaggio} "></div>
 		<div class="form-group">
-			<label for="password">Username</label> <input type="text"
-				class="form-control" th:field="*{username}" />
-		</div>
-		<div class="form-group">
-			<label for="password">Password</label> <input type="password"
-				class="form-control" th:field="*{password}" />
+			<label for="username">Username</label>
+			<input type="text" class="form-control" th:field="*{username}" />
+ 			<input type="hidden" id="oldusn" name="oldusn" th:value="*{username}"/>	
 		</div>
 		<div class="form-group">
 			<label for="ruolo">Ruolo</label> 
@@ -21,12 +18,16 @@
 			</select>
 		</div>		
 		<div class="form-group">
-			<label for="marca">Email</label> <input type="text"
+			<label for="email">Email</label> <input type="text"
 				class="form-control" th:field="*{email}" />
 		</div>
-		<div class="form-group">
-			<label for="enabled">Abilitato</label>
-				<input type="checkbox" th:field="*{enabled}" th:checked="${true}" />
+		<div class="form-group alert alert-warning">
+			<input type="checkbox" th:field="*{enabled}" th:checked="${true}" />		
+			<label for="enabled">Abilita</label>
+		</div>
+		<div class="form-group alert alert-danger">
+			<input type="checkbox" id="resetpw" name="resetPW"/>		
+			<label for="resetpw">Reset della Password</label>
 		</div>
 		<input class="btn btn-default" type="submit" value="invia" />
 		<hr />

@@ -3,6 +3,8 @@ package sample.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.UsersList;
+import sample.MailMail;
 import sample.model.Authorities;
 import sample.model.Users;
 import sample.repo.AuthoritiesRepository;
@@ -58,12 +61,34 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "/admin/users", method = RequestMethod.POST)
-	public String users(@ModelAttribute Users users, @RequestParam(value="ruolo", required=true) String ruolo, Model model) {
+	public String users(@ModelAttribute Users users,
+										@RequestParam(value="oldusn", required=true) String oldusn,
+										@RequestParam(value="resetpw", required=false) Boolean resetpw,										
+										@RequestParam(value="ruolo", required=true) String ruolo,
+										Model model) {
         System.out.println("Users -> EDIT ->POST");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String nomeUtente = auth.getName();
+        String nomeUtente = auth.getName();        
         try {
-	    		usr.save(users);	
+        		if (!oldusn.equals(users.getUsername()) && usr.exists(users.getUsername())){
+        			throw new Exception();	
+        		}      		
+                System.out.println("->" + resetpw + "<-");                
+        		if (null != resetpw){
+        			String passReset;
+        			passReset="123456";
+        			users.setPassword(passReset);
+        	    	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml"); 
+        	       	MailMail mm = (MailMail) context.getBean("mailMail");
+        	           mm.sendMail("from@no-spam.com",
+        	        		   	   "paolo.romani@furiere.ch",
+        	        		   	   "Automanager Info", 
+        	        		   	   "Informazione importante \n\n Nuovo codice : " + passReset);
+     			
+        		}else{
+        			users.setPasswordEncoded(usr.findOne(oldusn).getPassword());	
+        		}
+        		usr.save(users);
 	    		Authorities authorities = new Authorities();
     			authorities.setUsername(users.getUsername());
     			authorities.setAuthority(ruolo);
@@ -98,7 +123,9 @@ public class UsersController {
         System.out.println("Users -> Nuovo -> POST");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String nomeUtente = auth.getName();
-        try {
+        System.out.println(usr.exists(users.getUsername()));
+        try {      		
+        		if (usr.exists(users.getUsername())) throw new Exception();	
         		usr.save(users);	
         		Authorities authorities = new Authorities();
 				authorities.setUsername(users.getUsername());

@@ -37,7 +37,10 @@ public class Users {
 	  PasswordEncoder encoder = (PasswordEncoder) new BCryptPasswordEncoder();
 	  this.password = ((BCryptPasswordEncoder) encoder).encode(password);
 	 }
-
+	 public void setPasswordEncoded(String password) {
+		  this.password = password;
+		 }
+	 
 	 public boolean isEnabled() {
 	  return enabled;
 	 }
