@@ -1,13 +1,12 @@
 <title th:fragment="descrizione" th:text="${users.username}">AutoManager Modifica</title>
 <div th:fragment="content">
 	<h1>Modifica Utente</h1>
-	<form action="#" th:action="@{/admin/users}"
-		th:object="${users}" method="post">
+	<form action="#" th:action="@{/admin/users}" th:object="${users}" method="post" role="form" data-toggle="validator" onsubmit="modalSpedizione();">
 		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
 			th:text="${messaggio} "></div>
 		<div class="form-group">
 			<label for="username">Username</label>
-			<input type="text" class="form-control" th:field="*{username}" />
+			<input type="text" placeholder="nome utente" class="form-control" th:field="*{username}"  required/>
  			<input type="hidden" id="oldusn" name="oldusn" th:value="*{username}"/>	
 		</div>
 		<div class="form-group">
@@ -18,22 +17,24 @@
 			</select>
 		</div>		
 		<div class="form-group">
-			<label for="email">Email</label> <input type="text"
-				class="form-control" th:field="*{email}" />
+			<label for="email">Email</label>
+				<input type="text" placeholder="email" class="form-control" th:field="*{email}" data-error="Email non corretto" required/>			
+				<div class="help-block with-errors"></div>
 		</div>
 		<div class="form-group alert alert-warning">
 			<input type="checkbox" th:field="*{enabled}" th:checked="${true}" />		
 			<label for="enabled">Abilita</label>
 		</div>
 		<div class="form-group alert alert-danger">
-			<input type="checkbox" id="resetpw" name="resetPW"/>		
+			<input type="checkbox" id="resetpw" name="resetpw"/>		
 			<label for="resetpw">Reset della Password</label>
 		</div>
-		<input class="btn btn-default" type="submit" value="invia" />
+		<input class="btn btn-default" type="submit" value="invia"/>
 		<hr />
 		<a href="/admin/userslist">Ritorna alle lista utenti</a>
 	</form>
 	<hr />
 </div>
+<script th:fragment="script" src="" th:src="@{/js/validator.js}"></script>
 <script th:fragment="script" src="" th:src="@{/js/usersEdit.js}"></script>
 <script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.UsersList;
 import sample.MailMail;
+import sample.StringUtils;
 import sample.model.Authorities;
 import sample.model.Users;
 import sample.repo.AuthoritiesRepository;
@@ -63,7 +64,7 @@ public class UsersController {
 	@RequestMapping(value = "/admin/users", method = RequestMethod.POST)
 	public String users(@ModelAttribute Users users,
 										@RequestParam(value="oldusn", required=true) String oldusn,
-										@RequestParam(value="resetpw", required=false) Boolean resetpw,										
+										@RequestParam(value="resetpw", required=false) String resetpw,										
 										@RequestParam(value="ruolo", required=true) String ruolo,
 										Model model) {
         System.out.println("Users -> EDIT ->POST");
@@ -72,22 +73,27 @@ public class UsersController {
         try {
         		if (!oldusn.equals(users.getUsername()) && usr.exists(users.getUsername())){
         			throw new Exception();	
-        		}      		
+        		}    		
                 System.out.println("->" + resetpw + "<-");                
         		if (null != resetpw){
         			String passReset;
-        			passReset="123456";
+        			//passReset="123456";
+        			passReset=StringUtils.generateRandomPassword();
         			users.setPassword(passReset);
         	    	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml"); 
         	       	MailMail mm = (MailMail) context.getBean("mailMail");
-        	           mm.sendMail("from@no-spam.com",
-        	        		   	   "paolo.romani@furiere.ch",
-        	        		   	   "Automanager Info", 
-        	        		   	   "Informazione importante \n\n Nuovo codice : " + passReset);
-     			
+        	        mm.sendMail("lisp65@gmail.com",
+        	        		   	users.getEmail(),
+        	        		   	"paolo.romani@furiere.ch",
+        	        		   	"Automanager Info", 
+        	        		   	"Informazione importante \n\n Nuovo codice : " + passReset);     			
         		}else{
         			users.setPasswordEncoded(usr.findOne(oldusn).getPassword());	
         		}
+        		if (!oldusn.equals(users.getUsername())){
+        	        aur.deleteByUsername(oldusn);
+        	        usr.deleteByUsername(oldusn);	
+        		}         		
         		usr.save(users);
 	    		Authorities authorities = new Authorities();
     			authorities.setUsername(users.getUsername());
@@ -124,12 +130,28 @@ public class UsersController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String nomeUtente = auth.getName();
         System.out.println(usr.exists(users.getUsername()));
-        try {      		
-        		if (usr.exists(users.getUsername())) throw new Exception();	
+        try {      			
+        	 if (usr.exists(users.getUsername())) throw new Exception();
+ 				String passReset;
+ 				//passReset="123456";
+ 				passReset=StringUtils.generateRandomPassword();
+ 	            System.out.println("3"); 				
+ 				users.setPassword(passReset);
+ 				ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml"); 
+ 	            System.out.println("3"); 				
+ 				MailMail mm = (MailMail) context.getBean("mailMail");
+                System.out.println("4");   				
+ 				mm.sendMail("lisp65@gmail.com",
+ 	        		   	users.getEmail(),
+ 	        		   	"paolo.romani@furiere.ch",
+ 	        		   	"Automanager Info", 
+ 	        		   	"Informazione importante \n\n Nuovo codice : " + passReset); 
+                System.out.println("5");    	        
         		usr.save(users);	
         		Authorities authorities = new Authorities();
 				authorities.setUsername(users.getUsername());
 				authorities.setAuthority(ruolo);
+	            System.out.println("4");
 			    aur.save(authorities);				
 				log.info("User {}: Salvato Nuovo User-> {}", nomeUtente, users.getUsername());				
 	    		return "redirect:/admin/userslist";

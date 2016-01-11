@@ -1,33 +1,35 @@
-<title th:fragment="descrizione" th:text="${users.username}">AutoManager
-	Modifica</title>
+<title th:fragment="descrizione" th:text="${users.username}">AutoManager Modifica</title>
 <div th:fragment="content">
 	<h1>Inserimento Nuovo Utente</h1>
-	<form action="#" th:action="@{/admin/users/new}"
-		th:object="${users}" method="post">
+	<form action="#" th:action="@{/admin/users/new}" th:object="${users}" method="post" role="form" data-toggle="validator" onsubmit="modalSpedizione();">
 		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
 			th:text="${messaggio} "></div>
 		<div class="form-group">
-			<label for="marca">Username</label> <input type="text"
-				class="form-control" th:field="*{username}" />
+			<label for="marca">Username</label>
+			<input type="text" placeholder="nome utente" class="form-control" th:field="*{username}" required/>
 		</div>
-		<div class="form-group">
+<!--	<div class="form-group">
 			<label for="marca">Password</label> <input type="password"
 				class="form-control" th:field="*{password}" />
-		</div>	
+		</div>
+-->
 		<div class="form-group">
 			<label for="ruolo">Ruolo</label> 
 			<select class="form-control" id="ruolo" name="ruolo">			
 				<option th:each="ruolo : ${ruoli}" th:value="${ruolo.descrizione}" th:text="${ruolo.descrizione}"></option>
 			</select>
 		</div>
-		
 		<div class="form-group">
-			<label for="marca">Email</label> <input type="text"
-				class="form-control" th:field="*{email}" />
+			<label for="marca">Email</label>
+				<input type="email" placeholder="email" class="form-control" th:field="*{email}" data-error="Email non corretto" required/>			
+				<div class="help-block with-errors"></div>
 		</div>
-		<input class="btn btn-default" type="submit" value="invia" />
+		<input class="btn btn-default" type="submit" value="invia"/>
 		<hr />
 		<a href="/admin/userslist">Ritorna alle lista utenti</a>
 	</form>
 	<hr />
 </div>
+<script th:fragment="script" src="" th:src="@{/js/validator.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/usersEdit.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>

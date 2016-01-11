@@ -11,5 +11,6 @@ import sample.model.Users;
 public interface UsersRepository extends CrudRepository<Users, String> 
 {
     public Iterable<Users> findUsersByUsername(@Param("username") String username);  
-    public Iterable<Users> findByUsernameContainingIgnoreCase(String username);     
-}
+    public Iterable<Users> findByUsernameContainingIgnoreCase(String username);
+	public void deleteByUsername(String username);    
+    }
