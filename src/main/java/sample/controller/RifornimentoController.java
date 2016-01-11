@@ -3,7 +3,11 @@ package sample.controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +24,27 @@ import sample.repo.VeicoloRepository;
 @Controller
 public class RifornimentoController {
 
+
 	@Autowired
 	protected VeicoloRepository vei;
 
 	@Autowired
 	protected RifornimentoRepository rif;
 
+	@PreAuthorize("hasAuthority('USER')")
+	@RequestMapping(value = "/user/rifornimenti", method = RequestMethod.GET)
+	public String Rifornimenti(@RequestParam(value = "veiId", required = true) long id,
+			@RequestParam(value = "msg", required = false) String msg, Model model) {
+		System.out.println("Rifornimenti -> Lista -> GET");
+		model.addAttribute("messaggio", msg);
+		Veicolo v = vei.findOne(id);
+		v.setRifornimenti((ArrayList<Rifornimento>) rif.findRifornimentoByVeicoloId(v.getId()));
+		model.addAttribute("veicolo", v);
+		model.addAttribute("rifornimenti", v.getRifornimenti());
+		return "user@rifornimenti";
+	}
+	
+	
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.GET)
 	public String addRifornimento(@RequestParam(value = "veiId", required = true) long id,
@@ -39,7 +58,7 @@ public class RifornimentoController {
 		return "user@rifornimentoNewForm";
 	}
 
-	// @PreAuthorize("hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.POST)
 	public String saveRifornimento(@ModelAttribute Rifornimento rifornimento,
 			@RequestParam(value = "veicolo.id", required = true) long id, Model model) {
