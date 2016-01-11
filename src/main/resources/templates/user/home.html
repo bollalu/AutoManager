@@ -11,8 +11,11 @@
 				</h3>
 			</div>
 			<div class="panel-body">
-				<div>
-					<span th:text="'Conto rifornimenti: '+ ${veicolo.getRifornimenti().size()}"></span>
+				<div class="statDiv">
+					<span class="badge alert-info"
+						th:text="'Rifornimenti: '+ ${veicolo.getRifornimenti().size()}"></span>
+					<span class="badge alert-info"
+						th:text="'Cambi gomme: '+ ${veicolo.getCambiGomme().size()}"></span>
 				</div>
 
 				<div class="btn-group" role="group" aria-label="...">

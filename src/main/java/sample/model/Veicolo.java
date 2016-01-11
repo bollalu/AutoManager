@@ -1,10 +1,6 @@
 package sample.model;
 
-
-
-import java.awt.List;
 import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +16,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "veicolo")
 @Entity
 public class Veicolo {
-	
-	//@Autowired
-	//protected RifornimentoRepository rif;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,21 +29,26 @@ public class Veicolo {
 	@JoinColumn(name = "carburante")
 	private Carburante carburante;
 
-
 	@Column(unique = true)
 	private String targa;
-	
 
-
-	/*@Transient
-	@OneToMany(mappedBy="veicolo")*/
 	@Transient
 	@OneToMany
-    @JoinTable(
-      name = "rifornimento",
-      joinColumns = @JoinColumn(name = "veicolo")/*,
-      inverseJoinColumns = @JoinColumn(name = "id")*/)
-	private ArrayList<Rifornimento> rifornimenti = new ArrayList<>(); ;
+	@JoinTable(name = "rifornimento", joinColumns = @JoinColumn(name = "veicolo") )
+	private ArrayList<Rifornimento> rifornimenti = new ArrayList<>();
+	
+	@Transient
+	@OneToMany
+	@JoinTable(name = "cambio_gomme", joinColumns = @JoinColumn(name = "veicolo") )
+	private ArrayList<CambioGomme> cambiGomme = new ArrayList<>();
+
+	public ArrayList<CambioGomme> getCambiGomme() {
+		return cambiGomme;
+	}
+
+	public void setCambiGomme(ArrayList<CambioGomme> cambiGomme) {
+		this.cambiGomme = cambiGomme;
+	}
 
 	public ArrayList<Rifornimento> getRifornimenti() {
 		return rifornimenti;
@@ -61,7 +59,7 @@ public class Veicolo {
 	}
 
 	public Veicolo() {
-		
+
 	}
 
 	public Veicolo(Modello modello, String... tags) {
@@ -109,6 +107,5 @@ public class Veicolo {
 		return "Veicolo [id=" + id + ", marca=" + modello.getMarca() + ", modello=" + modello + ", targa=" + targa
 				+ ", carburante=" + carburante + "]";
 	}
-	
 
 }

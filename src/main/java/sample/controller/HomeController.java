@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import sample.model.CambioGomme;
 import sample.model.Rifornimenti;
 import sample.model.Rifornimento;
 import sample.model.Veicoli;
 import sample.model.Veicolo;
+import sample.repo.CambioGommeRepository;
 import sample.repo.RifornimentoRepository;
 import sample.repo.VeicoloRepository;
 
@@ -25,6 +27,9 @@ public class HomeController {
 
 	@Autowired
 	protected RifornimentoRepository rif;
+
+	@Autowired
+	protected CambioGommeRepository cgr;
 
 	// @PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -39,7 +44,8 @@ public class HomeController {
 		Iterator<Veicolo> veicoloIter = veicoli.iterator();
 		while (veicoloIter.hasNext()) {
 			Veicolo v = veicoloIter.next();
-			v.setRifornimenti((ArrayList<Rifornimento>) rif.findRifornimentoByVeicoloId(v.getId()));;
+			v.setRifornimenti((ArrayList<Rifornimento>) rif.findRifornimentoByVeicoloId(v.getId()));
+			v.setCambiGomme((ArrayList<CambioGomme>) cgr.findCambioGommeByVeicoloId(v.getId()));
 		}
 		model.addAttribute("veicoli", veicoli);
 		model.addAttribute("messaggio", msg);

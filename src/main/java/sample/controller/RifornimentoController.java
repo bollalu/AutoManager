@@ -1,5 +1,6 @@
 package sample.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,16 @@ public class RifornimentoController {
 		System.out.println("Rifornimento -> Nuovo -> POST");
 		try {
 			rifornimento.setData(new Date());
-			rifornimento.setVeicolo(vei.findOne(id));
-			rif.save(rifornimento);
+			Veicolo v = vei.findOne(id);
+			rifornimento.setVeicolo(v);
+
+			/*
+			 * ArrayList<Rifornimento> r = v.getRifornimenti();
+			 * r.add(rifornimento); rif.save(rifornimento);
+			 */
+
+			vei.save(v);
+
 			return "redirect:/user?msg=Rifornimento OK";
 		} catch (Exception e) {
 			// return "user@rifornimentoNewForm";
