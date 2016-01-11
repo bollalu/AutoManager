@@ -40,7 +40,6 @@ public class RifornimentoController {
 		Veicolo v = vei.findOne(id);
 		v.setRifornimenti((ArrayList<Rifornimento>) rif.findRifornimentoByVeicoloId(v.getId()));
 		model.addAttribute("veicolo", v);
-		model.addAttribute("rifornimenti", v.getRifornimenti());
 		return "user@rifornimenti";
 	}
 	

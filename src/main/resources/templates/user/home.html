@@ -14,9 +14,11 @@
 				<div class="statDiv">
 					<span class="badge alert-info"><a
 						th:href="'/user/rifornimenti?veiId='+${veicolo.id}" href=""
-						th:text="'Rifornimenti: '+ ${veicolo.getRifornimenti().size()}">conto rifornimenti</a></span>
-					<span class="badge alert-info"
-						th:text="'Cambi gomme: '+ ${veicolo.getCambiGomme().size()}"></span>
+						th:text="'Rifornimenti: '+ ${veicolo.getRifornimenti().size()}">conto
+							rifornimenti</a></span> <span class="badge alert-info"><a
+						th:href="'/user/cambigomme?veiId='+${veicolo.id}" href=""
+						th:text="'Cambi gomme: '+ ${veicolo.getCambiGomme().size()}">conto
+							cambi gomme</a></span>
 				</div>
 
 				<div class="btn-group" role="group" aria-label="...">

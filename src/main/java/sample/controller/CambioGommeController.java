@@ -1,5 +1,6 @@
 package sample.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import sample.model.CambioGomme;
 import sample.model.Rifornimento;
 import sample.model.Veicolo;
 import sample.repo.CambioGommeRepository;
+import sample.repo.RifornimentoRepository;
 import sample.repo.VeicoloRepository;
 
 @Controller
@@ -23,6 +25,18 @@ public class CambioGommeController {
 	protected VeicoloRepository vei;
 	@Autowired
 	protected CambioGommeRepository cgo;
+
+	@PreAuthorize("hasAuthority('USER')")
+	@RequestMapping(value = "/user/cambigomme", method = RequestMethod.GET)
+	public String Rifornimenti(@RequestParam(value = "veiId", required = true) long id,
+			@RequestParam(value = "msg", required = false) String msg, Model model) {
+		System.out.println("Cambi gomme -> Lista -> GET");
+		model.addAttribute("messaggio", msg);
+		Veicolo v = vei.findOne(id);
+		v.setCambiGomme((ArrayList<CambioGomme>) cgo.findCambioGommeByVeicoloId(v.getId()));
+		model.addAttribute("veicolo", v);
+		return "user@cambiGomme";
+	}
 	
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/cambiogomme/new", method = RequestMethod.GET)
