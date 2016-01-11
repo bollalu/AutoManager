@@ -41,12 +41,12 @@ function idReferenziato(elementi,tabella,filtro)
 	return numero;
 }
 
-function contaElementi(elementi)
+function contaElementi(elementi,searchText,filtro)
 {	
 	var numero = 0;
 	var cp = $("#contextPath").val();
 	cp = (cp == "/")? "":cp;
-	var url = cp+"/json/"+elementi;
+	var url = cp+"/json/"+ elementi + ((filtro) ? filtro : "")+ ((searchText) ? "/search?q="+searchText : "");
 	$.ajax({
 		url:url, 
 		dataType:"json",

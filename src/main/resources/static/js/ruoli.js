@@ -16,7 +16,7 @@ function caricaRuoli(searchText)
 	.done(function(data) {
 		$('#ruoli').empty();
 		$(data.ruoli).each(function(index, element){
-			 collegamenti=idReferenziato("Ruolo","ruoli",element.id);
+			 collegamenti=contaElementi("authorities",element.descrizione, "Aut");
 			 var elimina = (collegamenti > 0)? '<span class="badge alert-info">' +
 					    collegamenti+' Collegament' + ((collegamenti > 1)? 'i' : 'o')+'</span>':'<a href="/admin/ruolo/remove?id='+element.id+'" data-confirm="<table><tr><td>ID</td><td>' + element.id + '</td></tr>' +
 						'<tr><td>Ruolo&nbsp&nbsp</td><td>' + element.descrizione + '</td></tr></table>' +

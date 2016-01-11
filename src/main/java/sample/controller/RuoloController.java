@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Ruolo;
+import sample.model.Authorities;
+import sample.model.AuthoritiesList;
 import sample.model.Ruoli;
-
+import sample.repo.AuthoritiesRepository;
 import sample.repo.RuoloRepository;
 
 @Controller
@@ -25,7 +27,8 @@ public class RuoloController {
 
 	@Autowired
 	protected RuoloRepository rur;
-
+	@Autowired
+	protected AuthoritiesRepository aur;
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
@@ -116,7 +119,7 @@ public class RuoloController {
 	public @ResponseBody Ruoli ruoloJSON(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new Ruoli(rur.findByDescrizioneContainingIgnoreCase(q));
 	}
-
+	
 	@RequestMapping(value = "/json/ruolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Ruolo ruoloJSON(@PathVariable long id, Model model) {
 		return rur.findOne(id);

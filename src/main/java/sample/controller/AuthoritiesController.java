@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sample.model.Authorities;
 import sample.model.AuthoritiesList;
 import sample.repo.AuthoritiesRepository;
 
@@ -115,6 +114,11 @@ public class AuthoritiesController {
 	public @ResponseBody AuthoritiesList authoritiesListJSON(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new AuthoritiesList(aur.findAuthoritiesByUsername(q));
 	}
+	
+	@RequestMapping(value = "/json/authoritiesAut/search", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody AuthoritiesList authoritiesListJSONaut(@RequestParam(value = "q", required = true) String q, Model model) {
+		return new AuthoritiesList(aur.findAuthoritiesByAuthority(q));
+	}		
 
 /*
 

@@ -64,6 +64,7 @@ public class UsersController {
 	@RequestMapping(value = "/admin/users", method = RequestMethod.POST)
 	public String users(@ModelAttribute Users users,
 										@RequestParam(value="oldusn", required=true) String oldusn,
+										@RequestParam(value="oldemail", required=true) String oldemail,										
 										@RequestParam(value="resetpw", required=false) String resetpw,										
 										@RequestParam(value="ruolo", required=true) String ruolo,
 										Model model) {
@@ -103,8 +104,9 @@ public class UsersController {
 	    		return "redirect:/admin/userslist";
 			} catch (Exception e) {
 				model.addAttribute("messaggio", "L'utente " + users.getUsername() + " é già presente");
-				Users user = usr.findOne(users.getUsername());
-				model.addAttribute("users", user);
+				users.setUsername(oldusn);
+				users.setEmail(oldemail);
+				model.addAttribute("users", users);
 				model.addAttribute("ruoli", rur.findAll());	
 		        log.info("User {}: Non Salvata Modifica Utente (duplicato) Users-> {}", nomeUtente, users.getUsername());
 				return "admin@usersEditForm";
