@@ -2,18 +2,17 @@
 	Modifica</title>
 <div th:fragment="content">
 	<h1>Modifica Dati Carburante</h1>
-	<form action="#" th:action="@{/admin/carburante}"
-		th:object="${carburante}" method="post">
-		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
-			th:text="${messaggio} "></div>
+	<form action="#" th:action="@{/admin/carburante}" th:object="${carburante}" method="post" role="form" data-toggle="validator">
+		<div class="alert alert-warning" role="alert" th:if="${messaggio}" th:text="${messaggio} "></div>
 		<div class="form-group">
-			<label for="id" th:text="'Id: ' + *{id}">Id</label> <input
-				type="hidden" th:field="*{id}" />
+			<label for="id" th:text="'Id: ' + *{id}">Id</label>
+			<input type="hidden" th:field="*{id}" />
 		</div>
 
 		<div class="form-group">
-			<label for="marca">Descrizione</label> <input type="text"
-				class="form-control" th:field="*{descrizione}" />
+			<label for="carburante">Carburante</label>
+			<input type="text" class="form-control" th:field="*{descrizione}" data-error="Campo obbigatorio" required/>
+			<div class="help-block with-errors"></div>
 		</div>
 
 		<input class="btn btn-default" type="submit" value="invia" />
@@ -23,3 +22,5 @@
 	</form>
 	<hr />
 </div>
+<script th:fragment="script" src="" th:src="@{/js/validator.js}"></script>
+<script th:fragment="script" src="" th:src="@{/js/autoManagerTools.js}"></script>
