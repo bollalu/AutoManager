@@ -35,7 +35,6 @@ public class VeicoloController {
 	@Autowired	
 	protected RifornimentoRepository rir;	
 	
-	//@PreAuthorize("hasAuthority('USER')")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String greeting(Model model) {
@@ -50,7 +49,6 @@ public class VeicoloController {
 		return "admin@veicoli";
 	}
 	
-	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/veicolo", method = RequestMethod.GET)
 	public String veicolo(@RequestParam(value = "id", required = true) long id,	Model model) {
@@ -63,6 +61,7 @@ public class VeicoloController {
 		return "admin@veicoloEditForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/veicolo", method = RequestMethod.POST)
 	public String veicolo(@ModelAttribute Veicolo veicolo, Model model) {
         System.out.println("Veicolo -> POST");
@@ -80,6 +79,7 @@ public class VeicoloController {
 			}        
 	}         
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/veicolo/new", method = RequestMethod.GET)
 	public String veicolo(Model model) {
         System.out.println("Veicolo -> Nuovo -> GET");
@@ -91,6 +91,7 @@ public class VeicoloController {
 		return "admin@veicoloNewForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/veicolo/new", method = RequestMethod.POST)
 	public String veicoloPOST(@ModelAttribute Veicolo veicolo, Model model) {
         System.out.println("Veicolo -> Nuovo -> POST");
@@ -106,6 +107,7 @@ public class VeicoloController {
 			}        
 	}         
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/veicolo/remove", method = RequestMethod.GET)
 	public String veicoloRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Veicolo -> Remove -> GET");	
@@ -113,11 +115,13 @@ public class VeicoloController {
 		return "redirect:/admin/veicoli";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicoli", method = RequestMethod.GET)
 	public @ResponseBody Veicoli veicoliJSON(Model model) {
 		return new Veicoli(ver.findAll());
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicoli/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSONid(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Veicoli(ver.findVeicoliById(q));
@@ -128,26 +132,31 @@ public class VeicoloController {
 		return new Veicoli(ver.findVeicoliByTarga(q));
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicoli/searchCarburante", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSONcarburante(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Veicoli(ver.findVeicoliByCarburanteId(q));
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicoli/searchModello", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Veicoli veicoloJSONmodello(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Veicoli(ver.findVeicoliByModelloId(q));
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicoli/searchMarca", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Modelli veicoloJSONmarca(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Modelli(mor.findModelloByMarcaId(q));
 	}	
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicoli/searchRifornimento", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Rifornimenti rifornimentoJSONid(@RequestParam(value = "q", required = true) long q, Model model) {
 		return new Rifornimenti(rir.findRifornimentoByVeicoloId(q));
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/veicolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Veicolo veicoloJSON(@PathVariable long id, Model model) {
 		return ver.findOne(id);
