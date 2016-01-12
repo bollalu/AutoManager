@@ -1,4 +1,6 @@
 <title th:fragment="title">AutoManager</title>
+<div class="alert alert-success" role="alert" th:if="${messaggio}"
+			th:text="${messaggio} "></div>
 <div th:fragment="content">
 	<h1>Rifornimenti</h1>
 	<table id="tabella" class="table table-striped table-bordered"
@@ -9,6 +11,7 @@
 				<th>Km</th>
 				<th>Litri</th>
 				<th>Costo</th>
+				<th colspan="2"></th>
 			</tr>
 		</thead>
 		<tbody id="rifornimenti">
@@ -17,7 +20,11 @@
 				<td th:text="${rifornimento.km}"></td>
 				<td th:text="${rifornimento.litri}"></td>
 				<td th:text="${rifornimento.costo}"></td>
-
+				<td><a
+					th:href="'/user/rifornimento/edit?rifId='+ ${rifornimento.id}"><span
+						class="glyphicon glyphicon-pencil" style="padding-right: 8px;"></span></a><a
+					th:href="'/user/rifornimento/del?rifId='+ ${rifornimento.id}+'&veiId='+ ${veicolo.id}"><span
+						class="glyphicon glyphicon-trash" style="padding-right: 8px;"></span></a></td>
 			</tr>
 		</tbody>
 	</table>

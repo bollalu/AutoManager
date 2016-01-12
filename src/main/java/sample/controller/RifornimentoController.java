@@ -24,7 +24,6 @@ import sample.repo.VeicoloRepository;
 @Controller
 public class RifornimentoController {
 
-
 	@Autowired
 	protected VeicoloRepository vei;
 
@@ -42,8 +41,7 @@ public class RifornimentoController {
 		model.addAttribute("veicolo", v);
 		return "user@rifornimenti";
 	}
-	
-	
+
 	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user/rifornimento/new", method = RequestMethod.GET)
 	public String addRifornimento(@RequestParam(value = "veiId", required = true) long id,
@@ -65,13 +63,46 @@ public class RifornimentoController {
 		try {
 			rifornimento.setData(new Date());
 			Veicolo v = vei.findOne(id);
-			rifornimento.setVeicolo(v); 
+			rifornimento.setVeicolo(v);
 			rif.save(rifornimento);
 			return "redirect:/user?msg=Rifornimento OK";
 		} catch (Exception e) {
 			// return "user@rifornimentoNewForm";
 			return "redirect:/user?msg=" + e.getMessage();
 		}
+	}
+
+	@PreAuthorize("hasAuthority('USER')")
+	@RequestMapping(value = "/user/rifornimento/edit", method = RequestMethod.GET)
+	public String editRifornimento(@RequestParam(value = "veiId", required = true) long id,
+			@RequestParam(value = "msg", required = false) String msg, Model model) {
+		System.out.println("Rifornimento -> Edit -> GET");
+		/*
+		 * model.addAttribute("messaggio", msg); Veicolo veicolo =
+		 * vei.findOne(id); Rifornimento rifornimento = new Rifornimento();
+		 * rifornimento.setVeicolo(veicolo); model.addAttribute("rifornimento",
+		 * rifornimento);
+		 */
+		return "user@rifornimentoNewForm";
+	}
+
+	@PreAuthorize("hasAuthority('USER')")
+	@RequestMapping(value = "/user/rifornimento/del", method = RequestMethod.GET)
+	public String deleteRifornimento(@RequestParam(value = "rifId", required = true) long rifId,
+			@RequestParam(value = "veiId", required = true) long veiId, Model model) {
+		System.out.println("Rifornimento -> Delete -> GET");
+		rif.delete(rifId);
+		Veicolo v = vei.findOne(veiId);
+		ArrayList<Rifornimento> r = (ArrayList<Rifornimento>) rif.findRifornimentoByVeicoloId(v.getId());
+		model.addAttribute("messaggio", "Rifornimento cancellato!");
+		if (r.size() > 0) {
+			v.setRifornimenti(r);
+			model.addAttribute("veicolo", v);
+			return "user@rifornimenti";
+		} else {
+			return "user@home";
+		}
+
 	}
 
 }
