@@ -96,7 +96,7 @@ public class CarburanteController {
 				model.addAttribute("messaggio", "Il carburante " + carburante.getDescrizione() + " é già presente");
 				log.info("User {}: Non salvato Nuovo Carburante (duplicato) Carburante-> {}", nomeUtente, carburante.getDescrizione());
 				return "admin@carburanteNewForm";
-        }
+        } 
 	}
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
