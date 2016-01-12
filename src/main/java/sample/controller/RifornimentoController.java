@@ -66,14 +66,7 @@ public class RifornimentoController {
 			rifornimento.setData(new Date());
 			Veicolo v = vei.findOne(id);
 			rifornimento.setVeicolo(v);
-
-			/*
-			 * ArrayList<Rifornimento> r = v.getRifornimenti();
-			 * r.add(rifornimento); rif.save(rifornimento);
-			 */
-
-			vei.save(v);
-
+			rif.save(rifornimento);
 			return "redirect:/user?msg=Rifornimento OK";
 		} catch (Exception e) {
 			// return "user@rifornimentoNewForm";
