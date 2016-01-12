@@ -3,8 +3,7 @@
 	Modifica</title>
 <div th:fragment="content">
 	<h1>Modifica Dati Veicolo</h1>
-	<form action="#" th:action="@{/admin/veicolo}" th:object="${veicolo}"
-		method="post">
+	<form action="#" th:action="@{/admin/veicolo}" th:object="${veicolo}" method="post" method="post" role="form" data-toggle="validator">
 		<div class="alert alert-warning" role="alert" th:if="${messaggio}"
 			th:text="${messaggio} "></div>
 		<div class="form-group">
@@ -29,8 +28,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="targa">Targa</label> <input type="text"
-				class="form-control" th:field="*{targa}" />
+			<label for="targa">Targa</label> <input type="text" class="form-control" th:field="*{targa}" data-error="Campo obbigatorio" required/>
+			<div class="help-block with-errors"></div>
 		</div>
 
 		<div class="form-group">
