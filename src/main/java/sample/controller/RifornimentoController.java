@@ -65,7 +65,7 @@ public class RifornimentoController {
 		try {
 			rifornimento.setData(new Date());
 			Veicolo v = vei.findOne(id);
-			rifornimento.setVeicolo(v);
+			rifornimento.setVeicolo(v); 
 			rif.save(rifornimento);
 			return "redirect:/user?msg=Rifornimento OK";
 		} catch (Exception e) {

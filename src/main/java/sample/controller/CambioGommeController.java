@@ -55,7 +55,7 @@ public class CambioGommeController {
 	public String saveCambioGomme(@ModelAttribute CambioGomme cambioGomme, @RequestParam(value = "veicolo.id", required = true) long id,Model model) {
 		System.out.println("cambioGomme -> Nuovo -> POST");
 		try {
-			cambioGomme.setData(new Date());
+			cambioGomme.setData(new Date()); 
 			cambioGomme.setVeicolo(vei.findOne(id));
 			cgo.save(cambioGomme);
 			return "redirect:/user?msg=Cambio gomme OK";

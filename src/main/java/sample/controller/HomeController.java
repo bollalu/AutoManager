@@ -38,7 +38,7 @@ public class HomeController {
 		return "/login";
 	}
 
-	//@PreAuthorize("hasAuthority('USER')")
+	@PreAuthorize("hasAuthority('USER')")
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userHome(@RequestParam(value = "msg", required = false) String msg, Model model) {
 		Iterable<Veicolo> veicoli = vei.findAll();
