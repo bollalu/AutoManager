@@ -32,7 +32,6 @@ public class ModelloController {
 		return "admin@modelli";
 	}
 	
-	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/modello", method = RequestMethod.GET)
 	public String modello(@RequestParam(value = "id", required = true) long id,	Model model) {
@@ -44,6 +43,7 @@ public class ModelloController {
 		return "admin@modelloEditForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/modello", method = RequestMethod.POST)
 	public String modello(@ModelAttribute Modello modello, Model model) {
         System.out.println("Modello -> POST");
@@ -59,6 +59,7 @@ public class ModelloController {
 			}        
 	}        
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/modello/new", method = RequestMethod.GET)
 	public String modello(Model model) {
         System.out.println("Modello -> Nuovo -> GET");
@@ -68,6 +69,7 @@ public class ModelloController {
 		return "admin@modelloNewForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/modello/new", method = RequestMethod.POST)
 	public String modelloPOST(@ModelAttribute Modello modello, Model model) {
         System.out.println("Modello -> Nuovo -> POST");
@@ -81,6 +83,7 @@ public class ModelloController {
 			}
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/modello/remove", method = RequestMethod.GET)
 	public String modelloRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Modello -> Remove -> GET");	
@@ -88,29 +91,34 @@ public class ModelloController {
 		return "redirect:/admin/modelli";
 	}	
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/modelli", method = RequestMethod.GET)
 	public @ResponseBody Modelli modelliJSON(Model model) {
 		return new Modelli(mor.findAll());
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/modelli/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Modelli modelloJSON(@RequestParam(value = "q", required = true) String q, Model model) {
         System.out.println("Ricerca GENERICA");
 		return new Modelli(mor.findByDescrizioneContainingIgnoreCase(q));
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/modelli/marca", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Modelli modelloJSONmarca(@RequestParam(value = "q", required = true) Marca q, Model model) {
         System.out.println("Ricerca tramite MARCA");
 		return new Modelli(mor.findModelloByMarca(q));
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/modelli/marcaId", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Modelli modelloJSONmarcaId(@RequestParam(value = "q", required = true) long q, Model model) {
         System.out.println("Ricerca tramite MARCA");
 		return new Modelli(mor.findModelloByMarcaId(q));
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/modello/{id}", method = RequestMethod.GET)
 	public @ResponseBody Modello modelloJSON(@PathVariable long id, Model model) {
         System.out.println("Ricerca tramite ID");

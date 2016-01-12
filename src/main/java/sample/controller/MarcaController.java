@@ -21,15 +21,6 @@ public class MarcaController {
 
 	@Autowired
 	protected MarcaRepository mar;
-
-	
-	//@PreAuthorize("hasAuthority('USER')")
-	/*@PreAuthorize("hasAuthority('ADMIN')")
-	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String greeting(Model model) {
-        System.out.println("Admin -> GET");
-		return "admin@home";
-	}*/
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marche", method = RequestMethod.GET)
@@ -37,8 +28,7 @@ public class MarcaController {
         System.out.println("Marche -> GET");
 		return "admin@marche";
 	}
-	
-	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
+
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marca", method = RequestMethod.GET)
 	public String marca(@RequestParam(value = "id", required = true) long id,	Model model) {
@@ -48,6 +38,7 @@ public class MarcaController {
 		return "admin@marcaEditForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marca", method = RequestMethod.POST)
 	public String marca(@ModelAttribute Marca marca, Model model) {
         System.out.println("Marca -> POST");
@@ -62,6 +53,7 @@ public class MarcaController {
         }        
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.GET)
 	public String marca(Model model) {
         System.out.println("Marca -> Nuovo -> GET");
@@ -70,6 +62,7 @@ public class MarcaController {
 		return "admin@marcaNewForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marca/new", method = RequestMethod.POST)
 	public String marcaPOST(@ModelAttribute Marca marca, Model model) {
         System.out.println("Marca -> Nuovo -> POST");
@@ -82,6 +75,7 @@ public class MarcaController {
         }
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/marca/remove", method = RequestMethod.GET)
 	public String marcaRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Marca -> Remove -> GET");	
@@ -89,16 +83,19 @@ public class MarcaController {
 		return "redirect:/admin/marche";
 	}	
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/marche", method = RequestMethod.GET)
 	public @ResponseBody Marche marcheJSON(Model model) {
 		return new Marche(mar.findAll());
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/marche/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Marche marcaJSON(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new Marche(mar.findByDescrizioneContainingIgnoreCase(q));
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/marca/{id}", method = RequestMethod.GET)
 	public @ResponseBody Marca marcaJSON(@PathVariable long id, Model model) {
 		return mar.findOne(id);

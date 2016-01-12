@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.model.Ruolo;
-import sample.model.Authorities;
-import sample.model.AuthoritiesList;
 import sample.model.Ruoli;
 import sample.repo.AuthoritiesRepository;
 import sample.repo.RuoloRepository;
@@ -41,7 +39,6 @@ public class RuoloController {
 		return "admin@ruoli";
 	}
 	
-	// http://docs.spring.io/autorepo/docs/spring-security/3.2.1.RELEASE/apidocs/org/springframework/security/access/expression/SecurityExpressionOperations.html
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/ruolo", method = RequestMethod.GET)
 	public String ruolo(@RequestParam(value = "id", required = true) long id,	Model model) {
@@ -54,6 +51,7 @@ public class RuoloController {
 		return "admin@ruoloEditForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/ruolo", method = RequestMethod.POST)
 	public String ruolo(@ModelAttribute Ruolo ruolo, Model model) {
         System.out.println("Ruolo -> POST");
@@ -72,6 +70,7 @@ public class RuoloController {
         }
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/ruolo/new", method = RequestMethod.GET)
 	public String ruolo(Model model) {
         System.out.println("Ruolo -> Nuovo -> GET");
@@ -83,6 +82,7 @@ public class RuoloController {
 		return "admin@ruoloNewForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/ruolo/new", method = RequestMethod.POST)
 	public String ruoloPOST(@ModelAttribute Ruolo ruolo, Model model) {
         System.out.println("Ruolo -> Nuovo -> POST");
@@ -99,6 +99,7 @@ public class RuoloController {
         }
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/ruolo/remove", method = RequestMethod.GET)
 	public String ruoloRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Ruolo -> Remove -> GET");	
@@ -110,16 +111,19 @@ public class RuoloController {
 	}	
 
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/ruoli", method = RequestMethod.GET)
 	public @ResponseBody Ruoli ruoliJSON(Model model) {
 		return new Ruoli(rur.findAll());
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/ruoli/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Ruoli ruoloJSON(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new Ruoli(rur.findByDescrizioneContainingIgnoreCase(q));
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/ruolo/{id}", method = RequestMethod.GET)
 	public @ResponseBody Ruolo ruoloJSON(@PathVariable long id, Model model) {
 		return rur.findOne(id);

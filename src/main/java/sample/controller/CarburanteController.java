@@ -51,6 +51,7 @@ public class CarburanteController {
 		return "admin@carburanteEditForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/carburante", method = RequestMethod.POST)
 	public String carburante(@ModelAttribute Carburante carburante, Model model) {
         System.out.println("Carburante -> POST");
@@ -69,6 +70,7 @@ public class CarburanteController {
         }
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/carburante/new", method = RequestMethod.GET)
 	public String carburnate(Model model) {
         System.out.println("Carburante -> Nuovo -> GET");
@@ -80,6 +82,7 @@ public class CarburanteController {
 		return "admin@carburanteNewForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/carburante/new", method = RequestMethod.POST)
 	public String carburantePOST(@ModelAttribute Carburante carburante, Model model) {
         System.out.println("Carburante -> Nuovo -> POST");
@@ -96,6 +99,7 @@ public class CarburanteController {
         }
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/carburante/remove", method = RequestMethod.GET)
 	public String carburanteRemove(@RequestParam(value = "id", required = true) long id,	Model model) {
         System.out.println("Carburante -> Remove -> GET");	
@@ -107,16 +111,19 @@ public class CarburanteController {
 	}	
 
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/carburanti", method = RequestMethod.GET)
 	public @ResponseBody Carburanti carburantiJSON(Model model) {
 		return new Carburanti(car.findAll());
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/carburanti/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody Carburanti carburanteJSON(@RequestParam(value = "q", required = true) String q, Model model) {
 		return new Carburanti(car.findByDescrizioneContainingIgnoreCase(q));
 	}
 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/carburante/{id}", method = RequestMethod.GET)
 	public @ResponseBody Carburante carburanteJSON(@PathVariable long id, Model model) {
 		return car.findOne(id);

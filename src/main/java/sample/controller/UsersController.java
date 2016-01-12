@@ -61,6 +61,7 @@ public class UsersController {
 		return "admin@usersEditForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/users", method = RequestMethod.POST)
 	public String users(@ModelAttribute Users users,
 										@RequestParam(value="oldusn", required=true) String oldusn,
@@ -114,6 +115,7 @@ public class UsersController {
 	}
 	
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/users/new", method = RequestMethod.GET)
 	public String users(Model model) {
         System.out.println("Users -> Nuovo -> GET");
@@ -126,6 +128,7 @@ public class UsersController {
 		return "admin@usersNewForm";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/users/new", method = RequestMethod.POST)
 	public String usersPOST(@ModelAttribute Users users, @RequestParam(value="ruolo", required=true) String ruolo, Model model) {
         System.out.println("Users -> Nuovo -> POST");
@@ -165,6 +168,7 @@ public class UsersController {
 	}
 	
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/admin/users/remove", method = RequestMethod.GET)
 	public String usersRemove(@RequestParam(value = "id", required = true) String username, Model model) {
         System.out.println("Users -> Remove -> GET");	
@@ -176,11 +180,13 @@ public class UsersController {
 		return "redirect:/admin/userslist";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/userslist", method = RequestMethod.GET)
 	public @ResponseBody UsersList userslistJSON(Model model) {
 		return new UsersList(usr.findAll());
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/json/userslist/search", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody UsersList usersListJSON(@RequestParam(value = "q", required = true) String username, Model model) {
 		return new UsersList(usr.findUsersByUsername(username));
