@@ -83,7 +83,7 @@ public class RifornimentoController {
 		 * rifornimento.setVeicolo(veicolo); model.addAttribute("rifornimento",
 		 * rifornimento);
 		 */
-		return "user@rifornimentoNewForm";
+		return "user@rifornimentoNewForm"; 
 	}
 
 	@PreAuthorize("hasAuthority('USER')")
